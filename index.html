@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#123b70">
+  <meta name="description" content="OfiNexo conecta clientes con trabajadores y profesionales de todos los oficios.">
+  <title>OfiNexo | Conectamos personas</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #203047;
+      background: #f3f6fb;
+    }
+    header {
+      background: #123b70;
+      color: white;
+      padding: 22px 16px;
+      text-align: center;
+    }
+    .logo { font-size: 32px; font-weight: bold; }
+    .logo span { color: #55d6be; }
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    button, .btn {
+      border: 0;
+      border-radius: 9px;
+      padding: 12px 17px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .primary { background: #55d6be; color: #123b70; }
+    .secondary { background: white; color: #123b70; }
+    .hero {
+      text-align: center;
+      padding: 45px 18px;
+      background: linear-gradient(140deg, #e4f5ff, #ffffff);
+    }
+    h1 { font-size: 32px; margin: 0 0 15px; color: #123b70; }
+    .hero p { line-height: 1.6; max-width: 540px; margin: 0 auto 22px; }
+    .section { padding: 30px 16px; max-width: 1000px; margin: auto; }
+    h2 { color: #123b70; text-align: center; }
+    .search {
+      display: flex;
+      gap: 8px;
+      max-width: 600px;
+      margin: 22px auto;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 16px;
+      background: white;
+    }
+    .search input { min-width: 0; }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 13px;
+    }
+    .card {
+      background: white;
+      padding: 20px 12px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 3px 12px #17365b10;
+    }
+    .emoji { font-size: 32px; }
+    .card h3 { font-size: 16px; }
+    .card button { background: #e7f5f4; color: #123b70; }
+    .panel {
+      background: white;
+      padding: 22px;
+      border-radius: 14px;
+      max-width: 600px;
+      margin: 20px auto;
+      box-shadow: 0 3px 14px #17365b12;
+    }
+    .panel input, .panel select, .panel textarea { margin: 7px 0 12px; }
+    .panel button { width: 100%; }
+    .hidden { display: none; }
+    .notice { line-height: 1.6; color: #526176; font-size: 14px; }
+    footer {
+      background: #123b70;
+      color: white;
+      text-align: center;
+      padding: 24px 16px;
+      line-height: 1.7;
+    }
+    @media (max-width: 450px) {
+      h1 { font-size: 27px; }
+      .search { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Ofi<span>Nexo</span></div>
+  <p>Conectamos clientes con trabajadores y profesionales.</p>
+  <nav>
+    <button class="secondary" onclick="mostrar('cliente')">Buscar un servicio</button>
+    <button class="primary" onclick="mostrar('trabajador')">Soy trabajador</button>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <h1>Encontrá a la persona indicada para tu trabajo</h1>
+    <p>Plomería, electricidad, construcción, limpieza, clases particulares y muchos servicios más. Conectamos personas con personas.</p>
+    <button class="primary" onclick="mostrar('cliente')">Encontrar un profesional</button>
+  </section>
+
+  <section class="section">
+    <h2>¿Qué servicio necesitás?</h2>
+    <div class="search">
+      <input id="busqueda" placeholder="Ej.: plomero, electricista...">
+      <button class="primary" onclick="buscar()">Buscar</button>
+    </div>
+    <div class="cards" id="categorias">
+      <div class="card"><div class="emoji">🔧</div><h3>Plomería</h3><button onclick="elegir('Plomería')">Ver servicio</button></div>
+      <div class="card"><div class="emoji">💡</div><h3>Electricidad</h3><button onclick="elegir('Electricidad')">Ver servicio</button></div>
+      <div class="card"><div class="emoji">🧱</div><h3>Albañilería</h3><button onclick="elegir('Albañilería')">Ver servicio</button></div>
+      <div class="card"><div class="emoji">🧹</div><h3>Limpieza</h3><button onclick="elegir('Limpieza')">Ver servicio</button></div>
+      <div class="card"><div class="emoji">📚</div><h3>Clases y enseñanza</h3><button onclick="elegir('Clases y enseñanza')">Ver servicio</button></div>
+      <div class="card"><div class="emoji">⚖️</div><h3>Abogacía</h3><button onclick="elegir('Abogacía')">Ver servicio</button></div>
+      <div class="card"><div class="emoji">🧠</div><h3>Psicología</h3><button onclick="elegir('Psicología')">Ver servicio</button></div>
+      <div class="card"><div class="emoji">📊</div><h3>Contabilidad</h3><button onclick="elegir('Contabilidad')">Ver servicio</button></div>
+    </div>
+    <p id="resultado" aria-live="polite"></p>
+  </section>
+
+  <section class="section hidden" id="cliente">
+    <div class="panel">
+      <h2>Solicitar un servicio</h2>
+      <p>Contanos qué necesitás para preparar tu solicitud.</p>
+      <form onsubmit="solicitud(event)">
+        <label for="servicio">Oficio o categoría</label>
+        <input id="servicio" required placeholder="Ej.: reparación de una canilla">
+        <label for="detalle">Describí el trabajo</label>
+        <textarea id="detalle" required rows="4" placeholder="Explicá brevemente qué necesitás"></textarea>
+        <label for="zona">Localidad</label>
+        <input id="zona" required placeholder="Tu localidad">
+        <button class="primary" type="submit">Preparar solicitud</button>
+      </form>
+      <p class="notice">Esta versión es una demostración. Todavía no envía solicitudes a trabajadores reales.</p>
+    </div>
+  </section>
+
+  <section class="section hidden" id="trabajador">
+    <div class="panel">
+      <h2>Tu oficina virtual</h2>
+      <p>Presentá tus servicios y preparate para conectar con nuevos clientes.</p>
+      <form onsubmit="registro(event)">
+        <label for="nombre">Nombre</label>
+        <input id="nombre" required placeholder="Tu nombre">
+        <label for="oficio">Tu oficio o profesión</label>
+        <input id="oficio" required placeholder="Ej.: electricista">
+        <label for="descripcion">Descripción de tus servicios</label>
+        <textarea id="descripcion" required rows="3" placeholder="Contá qué trabajos realizás"></textarea>
+        <label for="localidad">Localidad</label>
+        <input id="localidad" required placeholder="Tu localidad">
+        <button class="primary" type="submit">Preparar mi perfil</button>
+      </form>
+      <p class="notice">Esta versión no crea cuentas reales ni publica perfiles. La verificación de identidad y la protección de datos deberán implementarse antes del lanzamiento.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>¿Cómo funciona OfiNexo?</h2>
+    <div class="cards">
+      <div class="card"><div class="emoji">🔎</div><h3>1. Buscá</h3><p>Encontrá la categoría que necesitás.</p></div>
+      <div class="card"><div class="emoji">🤝</div><h3>2. Conectá</h3><p>El objetivo es facilitar el contacto entre clientes y trabajadores.</p></div>
+      <div class="card"><div class="emoji">⭐</div><h3>3. Calificá</h3><p>En una versión futura podrás valorar los trabajos realizados.</p></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="logo">Ofi<span>Nexo</span></div>
+  Conectemos el cliente con trabajadores y profesionales.
+  <p>© 2026 OfiNexo · Todos los derechos reservados.</p>
+</footer>
+
+<script>
+  function mostrar(id) {
+    document.querySelectorAll('#cliente, #trabajador').forEach(
+      panel => panel.classList.add('hidden')
+    );
+    document.getElementById(id).classList.remove('hidden');
+    document.getElementById(id).scrollIntoView({behavior:'smooth'});
+  }
+
+  function elegir(categoria) {
+    document.getElementById('servicio').value = categoria;
+    mostrar('cliente');
+  }
+
+  function buscar() {
+    const texto = document.getElementById('busqueda').value.trim().toLowerCase();
+    const tarjetas = document.querySelectorAll('#categorias .card');
+    let cantidad = 0;
+    tarjetas.forEach(tarjeta => {
+      const coincide = tarjeta.innerText.toLowerCase().includes(texto);
+      tarjeta.style.display = coincide ? '' : 'none';
+      if (coincide) cantidad++;
+    });
+    document.getElementById('resultado').textContent =
+      cantidad ? 'Categorías encontradas: ' + cantidad :
+      'No encontramos esa categoría. Probá con otro nombre.';
+  }
+
+  function solicitud(event) {
+    event.preventDefault();
+    alert('La solicitud está preparada como demostración. Todavía no fue enviada a ningún trabajador.');
+  }
+
+  function registro(event) {
+    event.preventDefault();
+    alert('El perfil está preparado como demostración. Para publicarlo y recibir solicitudes necesitaremos implementar cuentas y una base de datos segura.');
+  }
+</script>
+</body>
+</html>
