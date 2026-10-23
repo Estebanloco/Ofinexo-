@@ -1,237 +1,853 @@
-
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#123b70">
-  <meta name="description" content="OfiNexo conecta clientes con trabajadores y profesionales de todos los oficios.">
-  <title>OfiNexo | Conectamos personas</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      color: #203047;
-      background: #f3f6fb;
-    }
-    header {
-      background: #123b70;
-      color: white;
-      padding: 22px 16px;
-      text-align: center;
-    }
-    .logo { font-size: 32px; font-weight: bold; }
-    .logo span { color: #55d6be; }
-    nav {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
-    }
-    button, .btn {
-      border: 0;
-      border-radius: 9px;
-      padding: 12px 17px;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-    }
-    .primary { background: #55d6be; color: #123b70; }
-    .secondary { background: white; color: #123b70; }
-    .hero {
-      text-align: center;
-      padding: 45px 18px;
-      background: linear-gradient(140deg, #e4f5ff, #ffffff);
-    }
-    h1 { font-size: 32px; margin: 0 0 15px; color: #123b70; }
-    .hero p { line-height: 1.6; max-width: 540px; margin: 0 auto 22px; }
-    .section { padding: 30px 16px; max-width: 1000px; margin: auto; }
-    h2 { color: #123b70; text-align: center; }
-    .search {
-      display: flex;
-      gap: 8px;
-      max-width: 600px;
-      margin: 22px auto;
-    }
-    input, select, textarea {
-      width: 100%;
-      padding: 13px;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
-      font-size: 16px;
-      background: white;
-    }
-    .search input { min-width: 0; }
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 13px;
-    }
-    .card {
-      background: white;
-      padding: 20px 12px;
-      border-radius: 12px;
-      text-align: center;
-      box-shadow: 0 3px 12px #17365b10;
-    }
-    .emoji { font-size: 32px; }
-    .card h3 { font-size: 16px; }
-    .card button { background: #e7f5f4; color: #123b70; }
-    .panel {
-      background: white;
-      padding: 22px;
-      border-radius: 14px;
-      max-width: 600px;
-      margin: 20px auto;
-      box-shadow: 0 3px 14px #17365b12;
-    }
-    .panel input, .panel select, .panel textarea { margin: 7px 0 12px; }
-    .panel button { width: 100%; }
-    .hidden { display: none; }
-    .notice { line-height: 1.6; color: #526176; font-size: 14px; }
-    footer {
-      background: #123b70;
-      color: white;
-      text-align: center;
-      padding: 24px 16px;
-      line-height: 1.7;
-    }
-    @media (max-width: 450px) {
-      h1 { font-size: 27px; }
-      .search { flex-direction: column; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkConnect - Conexión Directa Trabajador y Cliente</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        fb: {
+                            blue: '#1877f2',
+                            hover: '#166fe5',
+                            bg: '#f0f2f5',
+                            card: '#ffffff',
+                            secondary: '#65676b',
+                            lightBg: '#e7f3ff',
+                            green: '#31a24c'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f0f2f5;
+            font-family: 'Inter', sans-serif;
+            color: #1c1e21;
+        }
+        /* Custom scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f0f2f5;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #bcc0c4;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #9a9e text;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-fb-bg text-gray-900 antialiased selection:bg-blue-200">
 
-<header>
-  <div class="logo">Ofi<span>Nexo</span></div>
-  <p>Conectamos clientes con trabajadores y profesionales.</p>
-  <nav>
-    <button class="secondary" onclick="mostrar('cliente')">Buscar un servicio</button>
-    <button class="primary" onclick="mostrar('trabajador')">Soy trabajador</button>
-  </nav>
-</header>
+    <!-- ================= 1. BARRA NAVEGACIÓN SUPERIOR (ESTILO FACEBOOK) ================= -->
+    <header class="fixed top-0 left-0 right-0 h-14 bg-white shadow-sm z-50 flex items-center justify-between px-3 md:px-5 border-b border-gray-200">
+        <!-- Logo y Buscador Global -->
+        <div class="flex items-center space-x-2 md:w-1/4">
+            <a href="#" onclick="filterCategory('all')" class="flex items-center space-x-2 text-fb-blue font-bold text-2xl tracking-tight hover:opacity-90 transition">
+                <i class="fa-solid fa-briefcase text-2xl md:text-3xl"></i>
+                <span class="hidden sm:inline font-extrabold text-xl md:text-2xl">WorkConnect</span>
+            </a>
+            <div class="relative flex items-center bg-fb-bg rounded-full px-3 py-1.5 w-full max-w-[210px] border border-gray-200 focus-within:ring-2 focus-within:ring-fb-blue">
+                <i class="fa-solid fa-magnifying-glass text-fb-secondary text-xs mr-2"></i>
+                <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Buscar oficina, profesional..." class="bg-transparent border-none outline-none text-xs w-full placeholder-fb-secondary">
+            </div>
+        </div>
 
-<main>
-  <section class="hero">
-    <h1>Encontrá a la persona indicada para tu trabajo</h1>
-    <p>Plomería, electricidad, construcción, limpieza, clases particulares y muchos servicios más. Conectamos personas con personas.</p>
-    <button class="primary" onclick="mostrar('cliente')">Encontrar un profesional</button>
-  </section>
+        <!-- Pestañas de Navegación Centrales -->
+        <div class="flex items-center justify-center space-x-1 sm:space-x-2 md:space-x-4 h-full flex-1 max-w-lg">
+            <button onclick="switchTab('feed')" id="nav-feed" title="Inicio / Feed" class="flex-1 flex justify-center items-center h-full text-fb-blue border-b-4 border-fb-blue font-semibold px-2 sm:px-4 transition hover:bg-gray-50">
+                <i class="fa-solid fa-house text-lg sm:text-xl"></i>
+            </button>
+            <button onclick="switchTab('offices')" id="nav-offices" title="Oficinas en Vivo" class="flex-1 flex justify-center items-center h-full text-fb-secondary border-b-4 border-transparent hover:bg-gray-100 px-2 sm:px-4 transition">
+                <i class="fa-solid fa-building-user text-lg sm:text-xl"></i>
+            </button>
+            <button onclick="switchTab('clients')" id="nav-clients" title="Solicitudes de Clientes" class="flex-1 flex justify-center items-center h-full text-fb-secondary border-b-4 border-transparent hover:bg-gray-100 px-2 sm:px-4 transition">
+                <i class="fa-solid fa-users text-lg sm:text-xl"></i>
+            </button>
+            <button onclick="openChatModal('Carlos Mendoza - Desarrollador', 'Software & TI')" title="Mensajes" class="flex-1 flex justify-center items-center h-full text-fb-secondary border-b-4 border-transparent hover:bg-gray-100 px-2 sm:px-4 transition">
+                <i class="fa-solid fa-comment-dots text-lg sm:text-xl"></i>
+            </button>
+        </div>
 
-  <section class="section">
-    <h2>¿Qué servicio necesitás?</h2>
-    <div class="search">
-      <input id="busqueda" placeholder="Ej.: plomero, electricista...">
-      <button class="primary" onclick="buscar()">Buscar</button>
+        <!-- Acciones Rápidas del Usuario / Publicar Oficina -->
+        <div class="flex items-center space-x-2 justify-end md:w-1/4">
+            <button onclick="openNewPostModal()" class="bg-fb-blue hover:bg-fb-hover text-white font-semibold px-3 py-1.5 rounded-full text-xs sm:text-sm flex items-center shadow-sm transition">
+                <i class="fa-solid fa-plus-circle mr-1.5 text-sm"></i>
+                <span class="hidden sm:inline">Publicar Oficina</span>
+            </button>
+            <div class="flex items-center cursor-pointer p-1 rounded-full hover:bg-gray-200 transition" onclick="showToast('Perfil de usuario activo: Laura Martínez')">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Foto Trabajador" class="w-8 h-8 md:w-9 md:h-9 rounded-full object-cover border-2 border-fb-blue">
+            </div>
+        </div>
+    </header>
+
+    <!-- ================= 2. CONTENEDOR TRES COLUMNAS RESPONSIVO ================= -->
+    <div class="max-w-7xl mx-auto pt-16 px-2 sm:px-4 grid grid-cols-1 md:grid-cols-12 gap-5 my-4">
+
+        <!-- ===== COLUMNA IZQUIERDA: PERFIL & FILTROS POR CATEGORÍA ===== -->
+        <aside class="hidden md:block md:col-span-3 space-y-4 sticky top-16 h-fit">
+            
+            <!-- Tarjeta de Estado del Trabajador en su Oficina -->
+            <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-200">
+                <div class="flex flex-col items-center text-center pb-3 border-b border-gray-100">
+                    <div class="relative mb-2">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80" class="w-20 h-20 rounded-full object-cover border-2 border-fb-blue shadow">
+                        <span id="userStatusIndicator" class="absolute bottom-1 right-1 w-4 h-4 bg-emerald-500 border-2 border-white rounded-full"></span>
+                    </div>
+                    <h3 class="font-bold text-base text-gray-900">Laura Martínez</h3>
+                    <p class="text-xs text-fb-secondary font-medium">Arquitecta e Interiorista</p>
+                    <div id="userStatusBadge" class="mt-2 inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                        <i class="fa-solid fa-door-open mr-1.5"></i> En su Oficina
+                    </div>
+                </div>
+
+                <div class="mt-3 text-xs text-fb-secondary space-y-2">
+                    <div class="flex justify-between items-center py-1 border-b border-gray-50">
+                        <span><i class="fa-solid fa-location-dot mr-1.5 text-red-500"></i> Despacho:</span>
+                        <span class="font-semibold text-gray-800">Oficina 3B, Centro</span>
+                    </div>
+                    <div class="flex justify-between items-center py-1">
+                        <span><i class="fa-solid fa-shield-check mr-1.5 text-fb-blue"></i> Conexión:</span>
+                        <span class="font-bold text-emerald-600">Directa sin comisiones</span>
+                    </div>
+                </div>
+
+                <!-- Selector Interactivo de Estado del Trabajador -->
+                <div class="mt-3">
+                    <label class="block text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-1">Cambiar mi presencia:</label>
+                    <select id="workerStatusSelect" onchange="changeWorkerStatus(this.value)" class="w-full text-xs bg-gray-50 border border-gray-300 rounded-lg p-2 font-medium focus:ring-2 focus:ring-fb-blue outline-none cursor-pointer">
+                        <option value="En su Oficina">🟢 En su Oficina (Recibiendo)</option>
+                        <option value="Atendiendo Cita">🟡 Atendiendo Cita</option>
+                        <option value="Disponible Online">🔵 Disponible Online</option>
+                        <option value="Fuera de Oficina">🔴 Fuera de Oficina</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Filtros de Categorías Profesionales -->
+            <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-200">
+                <h4 class="font-bold text-sm text-gray-800 mb-3 flex items-center justify-between">
+                    <span><i class="fa-solid fa-layer-group text-fb-blue mr-2"></i> Especialidades</span>
+                    <span id="activeCategoryBadge" class="text-[10px] bg-blue-100 text-fb-blue px-2 py-0.5 rounded-full font-bold">Todas</span>
+                </h4>
+                <div class="space-y-1 text-sm">
+                    <button onclick="filterCategory('all')" class="category-btn w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100 font-semibold text-fb-blue bg-blue-50 flex items-center justify-between transition">
+                        <span><i class="fa-solid fa-border-all mr-2"></i> Todas las Categorías</span>
+                        <span class="text-xs bg-white text-fb-blue font-bold px-2 py-0.5 rounded-full border">4</span>
+                    </button>
+                    <button onclick="filterCategory('Tecnología & TI')" class="category-btn w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100 text-gray-700 flex items-center justify-between transition">
+                        <span><i class="fa-solid fa-laptop-code mr-2 text-indigo-500"></i> Tecnología & TI</span>
+                    </button>
+                    <button onclick="filterCategory('Arquitectura & Diseño')" class="category-btn w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100 text-gray-700 flex items-center justify-between transition">
+                        <span><i class="fa-solid fa-compass-drafting mr-2 text-amber-500"></i> Arquitectura</span>
+                    </button>
+                    <button onclick="filterCategory('Asesoría Legal & Contable')" class="category-btn w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100 text-gray-700 flex items-center justify-between transition">
+                        <span><i class="fa-solid fa-scale-balanced mr-2 text-emerald-500"></i> Legal & Contable</span>
+                    </button>
+                    <button onclick="filterCategory('Salud & Bienestar')" class="category-btn w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100 text-gray-700 flex items-center justify-between transition">
+                        <span><i class="fa-solid fa-user-doctor mr-2 text-rose-500"></i> Salud & Bienestar</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card de Confianza -->
+            <div class="p-3 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl text-xs text-blue-900">
+                <p class="font-bold mb-1 flex items-center"><i class="fa-solid fa-handshake text-fb-blue mr-1.5"></i> Conexión Directa</p>
+                <p class="leading-relaxed text-[11px] text-gray-600">Trato transparente sin intermediarios. Los profesionales atienden directamente desde su oficina física o virtual.</p>
+            </div>
+
+        </aside>
+
+        <!-- ===== COLUMNA CENTRAL: FEED PRINCIPAL (POSANDO EN SU OFICINA) ===== -->
+        <main class="col-span-1 md:col-span-9 lg:col-span-6 space-y-4">
+
+            <!-- Caja de Publicación Rápida -->
+            <div class="bg-white rounded-xl shadow-sm p-3.5 border border-gray-200">
+                <div class="flex items-center space-x-3 pb-3 border-b border-gray-100">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" class="w-10 h-10 rounded-full object-cover border border-gray-300">
+                    <button onclick="openNewPostModal()" class="w-full text-left bg-fb-bg hover:bg-gray-200 text-fb-secondary rounded-full px-4 py-2.5 text-xs sm:text-sm transition font-medium">
+                        ¿Estás en tu oficina hoy? Posar y compartir espacio con clientes...
+                    </button>
+                </div>
+                <div class="flex justify-around pt-2 text-xs font-semibold text-fb-secondary">
+                    <button onclick="openNewPostModal()" class="flex items-center space-x-2 hover:bg-gray-100 py-2 px-3 rounded-lg transition text-emerald-600">
+                        <i class="fa-solid fa-camera text-base"></i>
+                        <span>Posar en Oficina</span>
+                    </button>
+                    <button onclick="openNewPostModal()" class="flex items-center space-x-2 hover:bg-gray-100 py-2 px-3 rounded-lg transition text-fb-blue">
+                        <i class="fa-solid fa-briefcase text-base"></i>
+                        <span>Servicio</span>
+                    </button>
+                    <button onclick="openNewPostModal()" class="flex items-center space-x-2 hover:bg-gray-100 py-2 px-3 rounded-lg transition text-amber-500">
+                        <i class="fa-solid fa-dollar-sign text-base"></i>
+                        <span>Tarifas</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- BARRA DE RESULTADOS Y BÚSQUEDA -->
+            <div class="flex items-center justify-between px-1 text-xs text-fb-secondary">
+                <span id="resultsCount" class="font-semibold text-gray-700">Mostrando todas las publicaciones</span>
+                <span class="flex items-center"><i class="fa-solid fa-circle text-[8px] text-emerald-500 mr-1.5 animate-pulse"></i> Presencia en Vivo</span>
+            </div>
+
+            <!-- FEED DINÁMICO DE PUBLICACIONES -->
+            <div id="postsContainer" class="space-y-4">
+                <!-- Generado por JavaScript -->
+            </div>
+
+        </main>
+
+        <!-- ===== COLUMNA DERECHA: CLIENTES BUSCANDO SERVICIOS / SOLICITUDES ===== -->
+        <aside class="hidden lg:block lg:col-span-3 space-y-4 sticky top-16 h-fit">
+            
+            <!-- Panel de Solicitudes de Clientes -->
+            <div class="bg-white rounded-xl shadow-sm p-4 border border-gray-200">
+                <div class="flex justify-between items-center mb-3">
+                    <h4 class="font-bold text-sm text-gray-800 flex items-center">
+                        <i class="fa-solid fa-bullhorn text-fb-blue mr-2"></i> Clientes Buscando Hoy
+                    </h4>
+                    <span class="text-[10px] bg-red-100 text-red-600 px-2 py-0.5 rounded-full font-bold animate-pulse">En vivo</span>
+                </div>
+
+                <div class="space-y-3" id="clientRequestsList">
+                    <!-- Solicitud 1 -->
+                    <div class="p-3 bg-gray-50 hover:bg-blue-50/60 rounded-xl border border-gray-200 transition">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <div class="flex items-center space-x-2">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80" class="w-7 h-7 rounded-full object-cover">
+                                <div>
+                                    <h5 class="text-xs font-bold text-gray-900 leading-none">Roberto Gómez</h5>
+                                    <span class="text-[10px] text-fb-secondary">Hace 10 min</span>
+                                </div>
+                            </div>
+                            <span class="text-[10px] bg-amber-100 text-amber-800 font-bold px-1.5 py-0.5 rounded">Urgente</span>
+                        </div>
+                        <p class="text-xs text-gray-700 mb-2 leading-tight">"Busco arquitecto para revisar planos de remodelación comercial en el centro."</p>
+                        <button onclick="openChatModal('Roberto Gómez', 'Cliente - Proyecto Local')" class="w-full bg-fb-blue hover:bg-fb-hover text-white text-xs font-bold py-1.5 px-2 rounded-lg transition flex items-center justify-center shadow-sm">
+                            <i class="fa-solid fa-paper-plane mr-1.5"></i> Responder Solicitud
+                        </button>
+                    </div>
+
+                    <!-- Solicitud 2 -->
+                    <div class="p-3 bg-gray-50 hover:bg-blue-50/60 rounded-xl border border-gray-200 transition">
+                        <div class="flex items-center justify-between mb-1.5">
+                            <div class="flex items-center space-x-2">
+                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80" class="w-7 h-7 rounded-full object-cover">
+                                <div>
+                                    <h5 class="text-xs font-bold text-gray-900 leading-none">Mariana Silva</h5>
+                                    <span class="text-[10px] text-fb-secondary">Hace 45 min</span>
+                                </div>
+                            </div>
+                            <span class="text-[10px] bg-blue-100 text-fb-blue font-bold px-1.5 py-0.5 rounded">Consulta</span>
+                        </div>
+                        <p class="text-xs text-gray-700 mb-2 leading-tight">"Necesito abogado para auditoría de contratos societarios presencial o virtual."</p>
+                        <button onclick="openChatModal('Mariana Silva', 'Cliente - Contratos')" class="w-full bg-fb-blue hover:bg-fb-hover text-white text-xs font-bold py-1.5 px-2 rounded-lg transition flex items-center justify-center shadow-sm">
+                            <i class="fa-solid fa-paper-plane mr-1.5"></i> Responder Solicitud
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Publicidad / Muro informativo -->
+            <div class="bg-gradient-to-br from-fb-blue to-indigo-700 rounded-xl text-white p-4 shadow-md">
+                <span class="bg-white/20 text-white text-[10px] uppercase font-extrabold tracking-wider px-2 py-0.5 rounded-full mb-2 inline-block">Plataforma Directa</span>
+                <h4 class="font-bold text-sm mb-1">Muestra tu Oficina en Tiempo Real</h4>
+                <p class="text-xs text-blue-100 leading-relaxed mb-3">Las fotos en tu espacio de trabajo real generan 3x más confianza en los clientes.</p>
+                <button onclick="openNewPostModal()" class="w-full bg-white text-fb-blue font-bold py-2 rounded-lg text-xs shadow hover:bg-gray-100 transition">
+                    Publicar Mi Espacio
+                </button>
+            </div>
+
+        </aside>
+
     </div>
-    <div class="cards" id="categorias">
-      <div class="card"><div class="emoji">🔧</div><h3>Plomería</h3><button onclick="elegir('Plomería')">Ver servicio</button></div>
-      <div class="card"><div class="emoji">💡</div><h3>Electricidad</h3><button onclick="elegir('Electricidad')">Ver servicio</button></div>
-      <div class="card"><div class="emoji">🧱</div><h3>Albañilería</h3><button onclick="elegir('Albañilería')">Ver servicio</button></div>
-      <div class="card"><div class="emoji">🧹</div><h3>Limpieza</h3><button onclick="elegir('Limpieza')">Ver servicio</button></div>
-      <div class="card"><div class="emoji">📚</div><h3>Clases y enseñanza</h3><button onclick="elegir('Clases y enseñanza')">Ver servicio</button></div>
-      <div class="card"><div class="emoji">⚖️</div><h3>Abogacía</h3><button onclick="elegir('Abogacía')">Ver servicio</button></div>
-      <div class="card"><div class="emoji">🧠</div><h3>Psicología</h3><button onclick="elegir('Psicología')">Ver servicio</button></div>
-      <div class="card"><div class="emoji">📊</div><h3>Contabilidad</h3><button onclick="elegir('Contabilidad')">Ver servicio</button></div>
+
+    <!-- ================= 3. MODALES INTERACTIVOS ================= -->
+
+    <!-- MODAL 1: CREAR NUEVA PUBLICACIÓN (POSANDO EN OFICINA) -->
+    <div id="newPostModal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-3 hidden backdrop-blur-sm">
+        <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden animate-fade-in max-h-[90vh] flex flex-col">
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center px-4 py-3 border-b border-gray-200">
+                <h3 class="font-bold text-base text-gray-800 text-center flex-1">Posar en mi Oficina / Publicar Servicio</h3>
+                <button onclick="closeNewPostModal()" class="w-8 h-8 rounded-full bg-fb-bg hover:bg-gray-200 flex items-center justify-center text-fb-secondary transition">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Modal Form Body -->
+            <form id="postForm" onsubmit="handleCreatePost(event)" class="p-4 space-y-4 overflow-y-auto">
+                <!-- Info Trabajador -->
+                <div class="flex items-center space-x-3">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" class="w-10 h-10 rounded-full object-cover border border-fb-blue">
+                    <div>
+                        <h4 class="font-bold text-sm text-gray-900">Laura Martínez</h4>
+                        <select id="postStatusSelect" class="text-xs bg-gray-100 border border-gray-300 rounded-md px-2 py-1 mt-0.5 font-semibold text-gray-700 outline-none">
+                            <option value="En su Oficina">🟢 Estado: En su Oficina</option>
+                            <option value="Disponible Ahora">🔵 Estado: Disponible Ahora</option>
+                            <option value="Atendiendo Cita">🟡 Estado: Atendiendo Cita</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Categoría y Tarifa -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Categoría</label>
+                        <select id="postCategorySelect" class="w-full text-xs border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-fb-blue outline-none font-medium">
+                            <option value="Arquitectura & Diseño">Arquitectura & Diseño</option>
+                            <option value="Tecnología & TI">Tecnología & TI</option>
+                            <option value="Asesoría Legal & Contable">Asesoría Legal & Contable</option>
+                            <option value="Salud & Bienestar">Salud & Bienestar</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Tarifa Estimada / Hora</label>
+                        <input type="text" id="postRate" required placeholder="Ej: $35 USD / hora" value="$40 USD / Consulta" class="w-full text-xs border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-fb-blue outline-none">
+                    </div>
+                </div>
+
+                <!-- Descripción del Servicio -->
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Descripción de tu espacio y trabajo</label>
+                    <textarea id="postContent" rows="3" required placeholder="Describe lo que estás haciendo en tu oficina y qué servicios estás ofreciendo directamente al cliente..." class="w-full border border-gray-300 rounded-lg p-2.5 text-xs focus:ring-2 focus:ring-fb-blue outline-none resize-none">¡Hola a todos! Posando hoy desde mi estudio. Estoy recibiendo clientes para proyectos de remodelación residencial e interiorismo. Consultas presenciales o virtuales sin comisiones.</textarea>
+                </div>
+
+                <!-- Foto de la Oficina / Despacho -->
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Foto posando en tu Oficina (URL)</label>
+                    <input type="url" id="postImageUrl" required placeholder="https://images.unsplash.com/photo-..." value="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&auto=format&fit=crop&q=80" class="w-full text-xs border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-fb-blue outline-none">
+                    <p class="text-[10px] text-fb-secondary mt-1">Puedes dejar la URL por defecto o colocar el enlace de tu propia foto de oficina.</p>
+                </div>
+
+                <!-- Ubicación y Teléfono Directo -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Ubicación Oficina</label>
+                        <input type="text" id="postLocation" required placeholder="Ej: Oficina 3B, Centro" value="Oficina 3B, Edificio Central" class="w-full text-xs border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-fb-blue outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Teléfono / WhatsApp</label>
+                        <input type="text" id="postPhone" required placeholder="+54 9 11 1234-5678" value="+54 9 11 9876-5432" class="w-full text-xs border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-fb-blue outline-none">
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="w-full bg-fb-blue hover:bg-fb-hover text-white font-bold py-2.5 rounded-xl text-xs sm:text-sm shadow-md transition">
+                    Publicar en Muro de Oficinas
+                </button>
+            </form>
+        </div>
     </div>
-    <p id="resultado" aria-live="polite"></p>
-  </section>
 
-  <section class="section hidden" id="cliente">
-    <div class="panel">
-      <h2>Solicitar un servicio</h2>
-      <p>Contanos qué necesitás para preparar tu solicitud.</p>
-      <form onsubmit="solicitud(event)">
-        <label for="servicio">Oficio o categoría</label>
-        <input id="servicio" required placeholder="Ej.: reparación de una canilla">
-        <label for="detalle">Describí el trabajo</label>
-        <textarea id="detalle" required rows="4" placeholder="Explicá brevemente qué necesitás"></textarea>
-        <label for="zona">Localidad</label>
-        <input id="zona" required placeholder="Tu localidad">
-        <button class="primary" type="submit">Preparar solicitud</button>
-      </form>
-      <p class="notice">Esta versión es una demostración. Todavía no envía solicitudes a trabajadores reales.</p>
+    <!-- MODAL 2: CHAT DIRECTO CLIENTE-TRABAJADOR -->
+    <div id="chatModal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-3 hidden backdrop-blur-sm">
+        <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[520px] animate-fade-in">
+            <!-- Chat Header -->
+            <div class="bg-fb-blue text-white px-4 py-3 flex justify-between items-center shadow-sm">
+                <div class="flex items-center space-x-2.5">
+                    <div class="relative">
+                        <img id="chatUserImg" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100" class="w-9 h-9 rounded-full object-cover border-2 border-white">
+                        <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 border border-white rounded-full"></span>
+                    </div>
+                    <div>
+                        <h4 id="chatUserName" class="font-bold text-sm leading-tight">Carlos Mendoza</h4>
+                        <p id="chatUserRole" class="text-[11px] text-blue-100">Desarrollador Software</p>
+                    </div>
+                </div>
+                <button onclick="closeChatModal()" class="text-white hover:text-gray-200 p-1">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Direct Connection Ribbon -->
+            <div class="bg-amber-50 border-b border-amber-200 px-3 py-1.5 text-[11px] text-amber-900 flex items-center justify-between">
+                <span><i class="fa-solid fa-shield-halved text-amber-600 mr-1"></i> Conexión directa sin comisiones</span>
+                <span class="font-extrabold text-amber-700">Trato Directo</span>
+            </div>
+
+            <!-- Chat Messages Area -->
+            <div id="chatMessages" class="flex-1 p-3 overflow-y-auto space-y-3 bg-gray-50 text-xs">
+                <div class="flex justify-center">
+                    <span class="bg-gray-200 text-gray-600 px-3 py-1 rounded-full text-[10px] font-medium">Conversación directa iniciada hoy</span>
+                </div>
+                <!-- Mensaje de bienvenida simulado -->
+                <div class="flex items-start space-x-2">
+                    <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm border border-gray-200 max-w-[85%] text-gray-800 leading-relaxed">
+                        ¡Hola! Gracias por contactarme. Me encuentro en mi oficina disponible para atender tus consultas sobre presupuestos y proyectos. ¿En qué te puedo ayudar?
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Input Form -->
+            <form onsubmit="handleSendMessage(event)" class="p-2.5 bg-white border-t border-gray-200 flex items-center space-x-2">
+                <input type="text" id="chatInput" required placeholder="Escribe tu mensaje directo..." class="flex-1 border border-gray-300 rounded-full px-3.5 py-2 text-xs focus:ring-2 focus:ring-fb-blue outline-none">
+                <button type="submit" class="bg-fb-blue hover:bg-fb-hover text-white w-9 h-9 rounded-full flex items-center justify-center shadow transition flex-shrink-0">
+                    <i class="fa-solid fa-paper-plane text-xs"></i>
+                </button>
+            </form>
+        </div>
     </div>
-  </section>
 
-  <section class="section hidden" id="trabajador">
-    <div class="panel">
-      <h2>Tu oficina virtual</h2>
-      <p>Presentá tus servicios y preparate para conectar con nuevos clientes.</p>
-      <form onsubmit="registro(event)">
-        <label for="nombre">Nombre</label>
-        <input id="nombre" required placeholder="Tu nombre">
-        <label for="oficio">Tu oficio o profesión</label>
-        <input id="oficio" required placeholder="Ej.: electricista">
-        <label for="descripcion">Descripción de tus servicios</label>
-        <textarea id="descripcion" required rows="3" placeholder="Contá qué trabajos realizás"></textarea>
-        <label for="localidad">Localidad</label>
-        <input id="localidad" required placeholder="Tu localidad">
-        <button class="primary" type="submit">Preparar mi perfil</button>
-      </form>
-      <p class="notice">Esta versión no crea cuentas reales ni publica perfiles. La verificación de identidad y la protección de datos deberán implementarse antes del lanzamiento.</p>
+    <!-- MODAL 3: AGENDAR CITA EN OFICINA -->
+    <div id="appointmentModal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-3 hidden backdrop-blur-sm">
+        <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden animate-fade-in">
+            <div class="bg-fb-blue text-white px-4 py-3 flex justify-between items-center">
+                <h3 class="font-bold text-sm flex items-center">
+                    <i class="fa-solid fa-calendar-check mr-2"></i> Agendar Cita en Oficina
+                </h3>
+                <button onclick="closeAppointmentModal()" class="text-white hover:text-gray-200">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            
+            <form onsubmit="handleScheduleAppointment(event)" class="p-4 space-y-3.5 text-xs">
+                <div class="bg-blue-50 border border-blue-200 p-2.5 rounded-lg text-blue-900">
+                    <p class="font-semibold text-xs" id="appTargetWorker">Profesional: Laura Martínez</p>
+                    <p class="text-[11px] text-fb-secondary" id="appTargetLocation">Ubicación: Oficina 3B, Centro</p>
+                </div>
+
+                <div>
+                    <label class="block font-bold text-gray-700 mb-1">Nombre del Cliente</label>
+                    <input type="text" required placeholder="Tu Nombre y Apellido" value="Juan Carlos" class="w-full border border-gray-300 rounded-lg p-2 text-xs focus:ring-2 focus:ring-fb-blue outline-none">
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block font-bold text-gray-700 mb-1">Fecha</label>
+                        <input type="date" id="appDate" required class="w-full border border-gray-300 rounded-lg p-2 text-xs focus:ring-2 focus:ring-fb-blue outline-none">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-gray-700 mb-1">Hora</label>
+                        <select required class="w-full border border-gray-300 rounded-lg p-2 text-xs focus:ring-2 focus:ring-fb-blue outline-none">
+                            <option>10:00 AM</option>
+                            <option>11:30 AM</option>
+                            <option>03:00 PM</option>
+                            <option>05:00 PM</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block font-bold text-gray-700 mb-1">Detalle o Motivo de la Cita</label>
+                    <textarea rows="2" placeholder="Describe brevemente lo que necesitas..." class="w-full border border-gray-300 rounded-lg p-2 text-xs focus:ring-2 focus:ring-fb-blue outline-none resize-none">Consulta presencial en oficina sobre cotización de servicios.</textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl shadow transition">
+                    Confirmar Cita Directa
+                </button>
+            </form>
+        </div>
     </div>
-  </section>
 
-  <section class="section">
-    <h2>¿Cómo funciona OfiNexo?</h2>
-    <div class="cards">
-      <div class="card"><div class="emoji">🔎</div><h3>1. Buscá</h3><p>Encontrá la categoría que necesitás.</p></div>
-      <div class="card"><div class="emoji">🤝</div><h3>2. Conectá</h3><p>El objetivo es facilitar el contacto entre clientes y trabajadores.</p></div>
-      <div class="card"><div class="emoji">⭐</div><h3>3. Calificá</h3><p>En una versión futura podrás valorar los trabajos realizados.</p></div>
+    <!-- NOTIFICACIÓN TOAST EN PANTALLA -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-gray-900 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center space-x-2.5 text-xs z-50 transform translate-y-20 opacity-0 transition-all duration-300 border border-gray-700">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
+        <span id="toastMsg">Operación completada exitosamente</span>
     </div>
-  </section>
-</main>
 
-<footer>
-  <div class="logo">Ofi<span>Nexo</span></div>
-  Conectemos el cliente con trabajadores y profesionales.
-  <p>© 2026 OfiNexo · Todos los derechos reservados.</p>
-</footer>
+    <!-- ================= 4. JAVASCRIPT Y LÓGICA DE LA APLICACIÓN ================= -->
+    <script>
+        // BASE DE DATOS INICIAL DE TRABAJADORES EN SUS OFICINAS
+        let postsData = [
+            {
+                id: 1,
+                author: "Carlos Mendoza",
+                role: "Desarrollador Senior & Sistemas TI",
+                category: "Tecnología & TI",
+                avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
+                status: "En su Oficina",
+                statusBadgeClass: "bg-emerald-100 text-emerald-800 border-emerald-300",
+                location: "Oficina 402, Edificio Tech Center",
+                phone: "+54 9 11 4444-5555",
+                rate: "$35 USD / hora",
+                time: "Hace 15 minutos",
+                text: "¡Hola a todos! Posando hoy desde mi oficina. Estoy ofreciendo asesoría directa para desarrollo de software a medida, auditorías de sistemas y aplicaciones web. Pasen a consultar o agenden cita presencial sin intermediarios.",
+                officeImg: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&auto=format&fit=crop&q=80",
+                likes: 18,
+                isSaved: false
+            },
+            {
+                id: 2,
+                author: "Dra. Andrea Ríos",
+                role: "Abogada Especialista en Derecho Comercial",
+                category: "Asesoría Legal & Contable",
+                avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80",
+                status: "Disponible Ahora",
+                statusBadgeClass: "bg-blue-100 text-fb-blue border-blue-300",
+                location: "Estudio Jurídico Ríos & Asociados",
+                phone: "+54 9 11 3333-2222",
+                rate: "$50 USD / Consulta",
+                time: "Hace 1 hora",
+                text: "Espacio abierto en mi despacho para recepción de clientes. Atendiendo consultas legales societarias, registro de marcas y redacción de contratos. Trato 100% transparente directo cliente-profesional.",
+                officeImg: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=800&auto=format&fit=crop&q=80",
+                likes: 32,
+                isSaved: true
+            },
+            {
+                id: 3,
+                author: "Ing. Esteban Peralta",
+                role: "Arquitecto & Diseñador 3D",
+                category: "Arquitectura & Diseño",
+                avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80",
+                status: "En su Oficina",
+                statusBadgeClass: "bg-emerald-100 text-emerald-800 border-emerald-300",
+                location: "Taller Urban Arch, Oficina 12",
+                phone: "+54 9 11 8888-9999",
+                rate: "$45 USD / hora",
+                time: "Hace 3 horas",
+                text: "Revisando maquetas y catálogos de materiales para nuevos proyectos residenciales. Si necesitas diseñar o remodelar tu casa u oficina, contáctame para coordinar una reunión de trabajo.",
+                officeImg: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=800&auto=format&fit=crop&q=80",
+                likes: 25,
+                isSaved: false
+            },
+            {
+                id: 4,
+                author: "Dr. Marcelo Gómez",
+                role: "Consultor de Salud & Nutrición",
+                category: "Salud & Bienestar",
+                avatar: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=150&auto=format&fit=crop&q=80",
+                status: "Atendiendo Cita",
+                statusBadgeClass: "bg-amber-100 text-amber-800 border-amber-300",
+                location: "Consultorio Médico Centro",
+                phone: "+54 9 11 2222-1111",
+                rate: "$30 USD / Sesión",
+                time: "Hace 5 horas",
+                text: "Atendiendo pacientes en mi consultorio. Evaluaciones de bienestar integral y nutrición personalizada. Haz tu reserva directa sin demoras ni agencias.",
+                officeImg: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&auto=format&fit=crop&q=80",
+                likes: 14,
+                isSaved: false
+            }
+        ];
 
-<script>
-  function mostrar(id) {
-    document.querySelectorAll('#cliente, #trabajador').forEach(
-      panel => panel.classList.add('hidden')
-    );
-    document.getElementById(id).classList.remove('hidden');
-    document.getElementById(id).scrollIntoView({behavior:'smooth'});
-  }
+        let activeCategory = 'all';
 
-  function elegir(categoria) {
-    document.getElementById('servicio').value = categoria;
-    mostrar('cliente');
-  }
+        // CARGAR AL INICIAR
+        window.onload = function() {
+            // Establecer fecha por defecto en modal de citas
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('appDate').value = today;
+            renderPosts();
+        };
 
-  function buscar() {
-    const texto = document.getElementById('busqueda').value.trim().toLowerCase();
-    const tarjetas = document.querySelectorAll('#categorias .card');
-    let cantidad = 0;
-    tarjetas.forEach(tarjeta => {
-      const coincide = tarjeta.innerText.toLowerCase().includes(texto);
-      tarjeta.style.display = coincide ? '' : 'none';
-      if (coincide) cantidad++;
-    });
-    document.getElementById('resultado').textContent =
-      cantidad ? 'Categorías encontradas: ' + cantidad :
-      'No encontramos esa categoría. Probá con otro nombre.';
-  }
+        // RENDERIZAR LAS PUBLICACIONES DEL FEED
+        function renderPosts() {
+            const container = document.getElementById('postsContainer');
+            const searchVal = document.getElementById('searchInput').value.toLowerCase().trim();
 
-  function solicitud(event) {
-    event.preventDefault();
-    alert('La solicitud está preparada como demostración. Todavía no fue enviada a ningún trabajador.');
-  }
+            let filtered = postsData.filter(post => {
+                const matchesCat = activeCategory === 'all' || post.category === activeCategory;
+                const matchesSearch = post.author.toLowerCase().includes(searchVal) ||
+                                      post.role.toLowerCase().includes(searchVal) ||
+                                      post.text.toLowerCase().includes(searchVal) ||
+                                      post.location.toLowerCase().includes(searchVal);
+                return matchesCat && matchesSearch;
+            });
 
-  function registro(event) {
-    event.preventDefault();
-    alert('El perfil está preparado como demostración. Para publicarlo y recibir solicitudes necesitaremos implementar cuentas y una base de datos segura.');
-  }
-</script>
+            document.getElementById('resultsCount').innerText = `Mostrando ${filtered.length} publicaciones de profesionales`;
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="bg-white rounded-xl p-8 text-center border border-gray-200">
+                        <i class="fa-solid fa-building-circle-xmark text-4xl text-gray-300 mb-3"></i>
+                        <h3 class="font-bold text-gray-700 text-sm">No se encontraron oficinas ni publicaciones</h3>
+                        <p class="text-xs text-fb-secondary mt-1">Prueba con otro término de búsqueda o selecciona otra especialidad.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filtered.map(post => `
+                <article class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden transition hover:shadow-md">
+                    <!-- Post Header -->
+                    <div class="p-3.5 flex items-center justify-between border-b border-gray-50">
+                        <div class="flex items-center space-x-3">
+                            <img src="${post.avatar}" alt="${post.author}" class="w-11 h-11 rounded-full object-cover border-2 border-fb-blue">
+                            <div>
+                                <div class="flex items-center space-x-2 flex-wrap">
+                                    <h4 class="font-bold text-sm text-gray-900 hover:underline cursor-pointer">${post.author}</h4>
+                                    <span class="text-[10px] px-2 py-0.5 rounded-full font-extrabold border ${post.statusBadgeClass}">
+                                        <i class="fa-solid fa-circle text-[6px] mr-1"></i>${post.status}
+                                    </span>
+                                </div>
+                                <p class="text-xs text-fb-secondary font-medium">${post.role}</p>
+                                <div class="flex items-center space-x-2 text-[11px] text-gray-500 mt-0.5">
+                                    <span><i class="fa-solid fa-location-dot text-red-500 mr-1"></i>${post.location}</span>
+                                    <span>•</span>
+                                    <span class="font-semibold text-emerald-600"><i class="fa-solid fa-tag mr-1"></i>${post.rate}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="toggleSavePost(${post.id})" title="Guardar en favoritos" class="text-gray-400 hover:text-amber-500 p-1.5 transition">
+                            <i class="${post.isSaved ? 'fa-solid fa-bookmark text-amber-500' : 'fa-regular fa-bookmark'} text-base"></i>
+                        </button>
+                    </div>
+
+                    <!-- Post Content -->
+                    <div class="p-3.5 text-xs sm:text-sm text-gray-800 leading-relaxed">
+                        ${post.text}
+                    </div>
+
+                    <!-- Foto Posando en Oficina -->
+                    <div class="relative bg-gray-900 group">
+                        <img src="${post.officeImg}" alt="Oficina de ${post.author}" class="w-full max-h-[400px] object-cover transition duration-300">
+                        <div class="absolute bottom-2 left-2 bg-black/70 backdrop-blur-md text-white text-[10px] sm:text-xs px-2.5 py-1 rounded-lg font-medium flex items-center">
+                            <i class="fa-solid fa-camera mr-1.5 text-amber-400"></i> Posando en Oficina Física
+                        </div>
+                    </div>
+
+                    <!-- Post Actions & Direct Connection Buttons -->
+                    <div class="p-2.5 bg-gray-50 border-t border-gray-100 flex flex-wrap items-center justify-between gap-2">
+                        <!-- Recomendar Button -->
+                        <button onclick="likePost(${post.id})" class="px-3 py-1.5 rounded-lg hover:bg-gray-200 text-xs font-semibold text-fb-secondary flex items-center space-x-1.5 transition">
+                            <i class="fa-regular fa-thumbs-up text-sm"></i>
+                            <span>Recomendar (${post.likes})</span>
+                        </button>
+
+                        <!-- Botones de Acción Directa con Cliente -->
+                        <div class="flex items-center space-x-2 ml-auto">
+                            <button onclick="openAppointmentModal('${post.author}', '${post.location}')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold text-xs px-3 py-1.5 rounded-lg transition flex items-center">
+                                <i class="fa-solid fa-calendar-plus mr-1 text-xs"></i> Agendar Cita
+                            </button>
+                            <button onclick="openChatModal('${post.author}', '${post.role}')" class="bg-fb-blue hover:bg-fb-hover text-white font-bold text-xs px-3 py-1.5 rounded-lg transition flex items-center shadow-sm">
+                                <i class="fa-solid fa-comments mr-1 text-xs"></i> Contactar Directo
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        // DAR LIKE / RECOMENDAR
+        function likePost(id) {
+            const post = postsData.find(p => p.id === id);
+            if (post) {
+                post.likes++;
+                renderPosts();
+                showToast("Has recomendado la oficina de " + post.author);
+            }
+        }
+
+        // GUARDAR FAVORITO
+        function toggleSavePost(id) {
+            const post = postsData.find(p => p.id === id);
+            if (post) {
+                post.isSaved = !post.isSaved;
+                renderPosts();
+                showToast(post.isSaved ? "Publicación guardada en tus favoritos" : "Removido de favoritos");
+            }
+        }
+
+        // FILTRAR CATEGORÍAS
+        function filterCategory(cat) {
+            activeCategory = cat;
+            document.getElementById('activeCategoryBadge').innerText = cat === 'all' ? 'Todas' : cat;
+
+            // Actualizar estilo visual de botones
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-50', 'text-fb-blue', 'font-semibold');
+                btn.classList.add('text-gray-700');
+            });
+
+            renderPosts();
+            showToast("Filtro aplicado: " + (cat === 'all' ? 'Todas las oficinas' : cat));
+        }
+
+        // BÚSQUEDA EN TIEMPO REAL
+        function handleSearch() {
+            renderPosts();
+        }
+
+        // CAMBIAR ESTADO DEL TRABAJADOR
+        function changeWorkerStatus(val) {
+            const badge = document.getElementById('userStatusBadge');
+            const dot = document.getElementById('userStatusIndicator');
+
+            if (val === 'En su Oficina') {
+                badge.className = "mt-2 inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200";
+                badge.innerHTML = `<i class="fa-solid fa-door-open mr-1.5"></i> En su Oficina`;
+                dot.className = "absolute bottom-1 right-1 w-4 h-4 bg-emerald-500 border-2 border-white rounded-full";
+            } else if (val === 'Atendiendo Cita') {
+                badge.className = "mt-2 inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200";
+                badge.innerHTML = `<i class="fa-solid fa-user-clock mr-1.5"></i> Atendiendo Cita`;
+                dot.className = "absolute bottom-1 right-1 w-4 h-4 bg-amber-500 border-2 border-white rounded-full";
+            } else if (val === 'Disponible Online') {
+                badge.className = "mt-2 inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 text-fb-blue border border-blue-200";
+                badge.innerHTML = `<i class="fa-solid fa-laptop mr-1.5"></i> Disponible Online`;
+                dot.className = "absolute bottom-1 right-1 w-4 h-4 bg-fb-blue border-2 border-white rounded-full";
+            } else {
+                badge.className = "mt-2 inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-red-50 text-red-700 border border-red-200";
+                badge.innerHTML = `<i class="fa-solid fa-door-closed mr-1.5"></i> Fuera de Oficina`;
+                dot.className = "absolute bottom-1 right-1 w-4 h-4 bg-red-500 border-2 border-white rounded-full";
+            }
+
+            showToast("Tu estado ha sido actualizado a: " + val);
+        }
+
+        // MODAL PUBLICACIÓN NUEVA
+        function openNewPostModal() {
+            document.getElementById('newPostModal').classList.remove('hidden');
+        }
+
+        function closeNewPostModal() {
+            document.getElementById('newPostModal').classList.add('hidden');
+        }
+
+        function handleCreatePost(event) {
+            event.preventDefault();
+
+            const statusVal = document.getElementById('postStatusSelect').value;
+            const category = document.getElementById('postCategorySelect').value;
+            const rate = document.getElementById('postRate').value;
+            const content = document.getElementById('postContent').value;
+            const imageUrl = document.getElementById('postImageUrl').value;
+            const location = document.getElementById('postLocation').value;
+            const phone = document.getElementById('postPhone').value;
+
+            let badgeClass = "bg-emerald-100 text-emerald-800 border-emerald-300";
+            if (statusVal.includes('Atendiendo')) badgeClass = "bg-amber-100 text-amber-800 border-amber-300";
+            if (statusVal.includes('Disponible')) badgeClass = "bg-blue-100 text-fb-blue border-blue-300";
+
+            const newPost = {
+                id: Date.now(),
+                author: "Laura Martínez",
+                role: "Arquitecta e Interiorista",
+                category: category,
+                avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+                status: statusVal.replace(/🟢|🔵|🟡|Estado:\s*/g, '').trim(),
+                statusBadgeClass: badgeClass,
+                location: location,
+                phone: phone,
+                rate: rate,
+                time: "Justo ahora",
+                text: content,
+                officeImg: imageUrl || "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&auto=format&fit=crop&q=80",
+                likes: 0,
+                isSaved: false
+            };
+
+            postsData.unshift(newPost);
+            renderPosts();
+            closeNewPostModal();
+            showToast("¡Tu publicación posando en la oficina fue creada con éxito!");
+        }
+
+        // MODAL DE CHAT EN VIVO
+        function openChatModal(userName, userRole) {
+            document.getElementById('chatUserName').innerText = userName;
+            document.getElementById('chatUserRole').innerText = userRole;
+            document.getElementById('chatModal').classList.remove('hidden');
+        }
+
+        function closeChatModal() {
+            document.getElementById('chatModal').classList.add('hidden');
+        }
+
+        function handleSendMessage(e) {
+            e.preventDefault();
+            const input = document.getElementById('chatInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const chatMessages = document.getElementById('chatMessages');
+
+            // Mensaje enviado por cliente
+            const clientMsg = `
+                <div class="flex items-start justify-end space-x-2">
+                    <div class="bg-fb-blue text-white p-2.5 rounded-2xl rounded-tr-none shadow-sm max-w-[85%] leading-relaxed">
+                        ${text}
+                    </div>
+                </div>
+            `;
+            chatMessages.insertAdjacentHTML('beforeend', clientMsg);
+            input.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Respuesta automática simulada del trabajador en su oficina
+            setTimeout(() => {
+                const workerReply = `
+                    <div class="flex items-start space-x-2">
+                        <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm border border-gray-200 max-w-[85%] text-gray-800 leading-relaxed">
+                            <span class="font-bold text-[10px] text-fb-blue block mb-0.5"><i class="fa-solid fa-building mr-1"></i> Respuesta en directo</span>
+                            ¡Perfecto! Recibido. Te confirmo que estoy en la oficina y podemos coordinar la atención directa.
+                        </div>
+                    </div>
+                `;
+                chatMessages.insertAdjacentHTML('beforeend', workerReply);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1000);
+        }
+
+        // MODAL DE AGENDAR CITA
+        function openAppointmentModal(workerName, location) {
+            document.getElementById('appTargetWorker').innerText = "Profesional: " + workerName;
+            document.getElementById('appTargetLocation').innerText = "Ubicación: " + location;
+            document.getElementById('appointmentModal').classList.remove('hidden');
+        }
+
+        function closeAppointmentModal() {
+            document.getElementById('appointmentModal').classList.add('hidden');
+        }
+
+        function handleScheduleAppointment(e) {
+            e.preventDefault();
+            closeAppointmentModal();
+            showToast("¡Cita agendada con éxito! El profesional te espera en su oficina.");
+        }
+
+        // NAVEGACIÓN POR PESTAÑAS
+        function switchTab(tab) {
+            const feedBtn = document.getElementById('nav-feed');
+            const officesBtn = document.getElementById('nav-offices');
+            const clientsBtn = document.getElementById('nav-clients');
+
+            [feedBtn, officesBtn, clientsBtn].forEach(b => {
+                b.classList.remove('text-fb-blue', 'border-fb-blue');
+                b.classList.add('text-fb-secondary', 'border-transparent');
+            });
+
+            if (tab === 'feed') {
+                feedBtn.classList.add('text-fb-blue', 'border-fb-blue');
+                filterCategory('all');
+            } else if (tab === 'offices') {
+                officesBtn.classList.add('text-fb-blue', 'border-fb-blue');
+                showToast("Mostrando oficinas con atención presencial hoy");
+            } else if (tab === 'clients') {
+                clientsBtn.classList.add('text-fb-blue', 'border-fb-blue');
+                showToast("Mostrando solicitudes directas de clientes");
+            }
+        }
+
+        // FUNCIÓN MOSTRAR TOAST NOTIFICACIÓN
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+    </script>
 </body>
 </html>
+```
