@@ -3,306 +3,959 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#102b46">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#092b49">
 <meta name="description" content="OfiNexo conecta clientes con trabajadores y profesionales.">
-<title>OfiNexo | Conectamos personas y oficios</title>
+<title>OfiNexo | Tu red de oficios</title>
+
 <style>
 :root {
-  --azul:#102b46;
-  --azul2:#194e78;
-  --verde:#16a085;
-  --fondo:#f2f6fa;
-  --texto:#203044;
+  --azul:#092b49;
+  --azul2:#12496b;
+  --verde:#08b99a;
+  --fondo:#edf3f8;
+  --texto:#203348;
+  --gris:#718196;
+  --borde:#e2eaf1;
 }
-* {box-sizing:border-box}
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
 body {
   margin:0;
   font-family:Arial,Helvetica,sans-serif;
-  background:var(--fondo);
   color:var(--texto);
+  background:var(--fondo);
 }
+button,input,textarea,select { font:inherit; }
+button { cursor:pointer; }
+button:focus-visible,input:focus-visible,select:focus-visible,
+textarea:focus-visible { outline:2px solid var(--verde); outline-offset:2px; }
+
 header {
+  position:sticky;
+  top:0;
+  z-index:10;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding:13px 4%;
   background:var(--azul);
   color:white;
-  padding:18px 5%;
+  box-shadow:0 3px 12px #00182b25;
+}
+.logo {
+  font-size:25px;
+  font-weight:900;
+  white-space:nowrap;
+}
+.logo span { color:#23d8b5; }
+nav { display:flex; gap:15px; flex-wrap:wrap; }
+nav a {
+  color:white;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:bold;
+}
+.top-search { flex:1; min-width:130px; }
+input,select,textarea {
+  width:100%;
+  padding:12px;
+  border:1px solid #d4dfe9;
+  border-radius:10px;
+  background:white;
+  color:var(--texto);
+}
+.btn {
+  display:inline-block;
+  border:0;
+  border-radius:10px;
+  padding:12px 16px;
+  background:var(--verde);
+  color:#063a49;
+  font-weight:800;
+}
+.btn:hover { filter:brightness(.96); }
+.btn-outline {
+  background:transparent;
+  color:white;
+  border:1px solid #658098;
+}
+.btn-white {
+  background:white;
+  color:var(--azul);
+  border:1px solid var(--borde);
+}
+main {
+  max-width:1450px;
+  margin:auto;
+  padding:18px;
+}
+.layout {
+  display:grid;
+  grid-template-columns:205px minmax(0,1fr) 285px;
+  gap:17px;
+  align-items:start;
+}
+.card {
+  background:white;
+  border:1px solid var(--borde);
+  border-radius:15px;
+  box-shadow:0 4px 18px #18334b08;
+}
+.sidebar {
+  padding:16px;
+  position:sticky;
+  top:85px;
+}
+.side-user {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding-bottom:15px;
+  border-bottom:1px solid var(--borde);
+  margin-bottom:12px;
+}
+.avatar {
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  object-fit:cover;
+  background:#dce8f0;
+  flex-shrink:0;
+}
+.side-user strong { font-size:13px; }
+.muted { color:var(--gris); font-size:11px; }
+.side-link {
+  width:100%;
+  display:block;
+  text-align:left;
+  padding:11px 9px;
+  margin:3px 0;
+  border:0;
+  border-radius:9px;
+  background:white;
+  color:#43576c;
+  font-weight:bold;
+  font-size:12px;
+}
+.side-link:hover,.side-link.active {
+  background:#def8f1;
+  color:#087c69;
+}
+.side-link span { margin-right:9px; }
+.side-cta { width:100%; margin-top:12px; }
+
+.hero {
+  padding:28px;
+  border-radius:17px;
+  color:white;
+  background:
+    linear-gradient(100deg,#092b49 12%,#104b6b 67%,#104b6b99),
+    url("https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1200&q=80") center/cover;
+}
+.eyebrow {
+  color:#57e9c7;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+}
+.hero h1 {
+  max-width:580px;
+  margin:10px 0;
+  font-size:clamp(29px,4vw,43px);
+  line-height:1.08;
+}
+.hero p {
+  max-width:520px;
+  font-size:14px;
+  line-height:1.6;
+  color:#e3eff7;
+}
+.search-row {
+  display:flex;
+  gap:7px;
+  margin-top:20px;
+  padding:6px;
+  border-radius:12px;
+  background:white;
+}
+.search-row input {
+  min-width:0;
+  border:0;
+  border-radius:7px;
+}
+.search-row .btn { white-space:nowrap; }
+.trust {
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-top:14px;
+  color:#e3fff8;
+  font-size:11px;
+}
+.trust span:before { content:"✓ "; color:#57e9c7; }
+
+.section-head {
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:12px;
+  gap:8px;
+  margin:23px 2px 12px;
+}
+.section-head h2 {
+  margin:0;
+  color:var(--azul);
+  font-size:18px;
+}
+.link-btn {
+  border:0;
+  background:transparent;
+  color:#078875;
+  font-size:12px;
+  font-weight:bold;
+}
+.categories {
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:8px;
+}
+.category {
+  padding:13px 4px;
+  border:1px solid var(--borde);
+  border-radius:12px;
+  background:white;
+  color:var(--texto);
+  font-size:11px;
+  font-weight:bold;
+}
+.category:hover { border-color:var(--verde); }
+.emoji {
+  display:block;
+  font-size:25px;
+  margin-bottom:8px;
+}
+.composer { padding:14px; margin-top:20px; }
+.compose-row { display:flex; gap:10px; align-items:center; }
+.compose-button {
+  flex:1;
+  padding:13px;
+  text-align:left;
+  border:1px solid var(--borde);
+  border-radius:25px;
+  background:#f6f9fc;
+  color:var(--gris);
+  font-size:12px;
+}
+.compose-actions {
+  display:flex;
+  gap:6px;
+  margin-top:12px;
+  padding-top:10px;
+  border-top:1px solid var(--borde);
+}
+.compose-actions button {
+  flex:1;
+  padding:9px 3px;
+  border:0;
+  border-radius:8px;
+  background:white;
+  color:#52677c;
+  font-size:11px;
+  font-weight:bold;
+}
+.compose-actions button:hover { background:#eaf8f4; }
+
+.filters { display:flex; gap:7px; overflow:auto; }
+.filter {
+  padding:8px 12px;
+  border:1px solid var(--borde);
+  border-radius:20px;
+  background:white;
+  color:#596d81;
+  font-size:11px;
+  white-space:nowrap;
+}
+.filter.active { background:#dff9f2; color:#087c69; }
+
+.feed { display:grid; gap:14px; margin-top:13px; }
+.post { padding:15px; min-width:0; }
+.post-head { display:flex; align-items:center; gap:10px; }
+.post-person { flex:1; min-width:0; }
+.post-person strong { font-size:13px; }
+.post-meta { margin-top:4px; color:var(--gris); font-size:11px; }
+.verified { color:#128ec0; }
+.post p { font-size:13px; line-height:1.6; }
+.post-photo {
+  width:100%;
+  max-height:330px;
+  object-fit:cover;
+  border-radius:10px;
+  background:#e5edf3;
+}
+.tag {
+  display:inline-block;
+  padding:5px 8px;
+  margin:3px 3px 3px 0;
+  border-radius:15px;
+  background:#e1f8f1;
+  color:#087b68;
+  font-size:10px;
+  font-weight:bold;
+}
+.post-stats {
+  display:flex;
+  justify-content:space-between;
+  gap:6px;
   flex-wrap:wrap;
+  padding:10px 0;
+  border-bottom:1px solid var(--borde);
+  color:var(--gris);
+  font-size:11px;
 }
-.logo {font-size:27px;font-weight:bold}
-.logo span {color:#42d6ad}
-nav {display:flex;gap:15px;flex-wrap:wrap}
-nav a {color:white;text-decoration:none;font-size:14px}
-button,.boton {
-  border:0;border-radius:10px;padding:12px 16px;
-  background:var(--verde);color:white;font-weight:bold;
-  cursor:pointer;text-decoration:none;display:inline-block;
+.post-actions { display:flex; gap:4px; padding-top:7px; }
+.post-actions button {
+  flex:1;
+  padding:9px 2px;
+  border:0;
+  border-radius:8px;
+  background:white;
+  color:#53677b;
+  font-size:11px;
+  font-weight:bold;
 }
-button.secundario,.secundario {
-  background:white;color:var(--azul);
-  border:1px solid #d4deea;
+.post-actions button:hover { background:#eff8f7; }
+
+.right-col { display:grid; gap:14px; }
+.right-card { padding:15px; }
+.right-title {
+  margin:0 0 12px;
+  color:var(--azul);
+  font-size:15px;
 }
-main {max-width:1100px;margin:auto;padding:22px 16px}
-.hero {
-  background:linear-gradient(135deg,#102b46,#21638a);
-  color:white;border-radius:20px;padding:34px 24px;
+.worker-row {
+  display:flex;
+  gap:9px;
+  align-items:center;
+  padding:11px 0;
+  border-top:1px solid #edf1f5;
 }
-.hero h1 {font-size:clamp(29px,5vw,45px);margin:0 0 14px}
-.hero p {line-height:1.7;max-width:650px}
-.busqueda {
-  display:flex;gap:10px;flex-wrap:wrap;margin-top:22px;
+.worker-row .info { flex:1; min-width:0; }
+.worker-row strong { display:block; font-size:12px; }
+.worker-row .sub { margin-top:3px; color:var(--gris); font-size:10px; }
+.rating { margin-top:4px; color:#d99a00; font-size:11px; }
+.available {
+  padding:4px 6px;
+  border-radius:15px;
+  background:#e3f9ef;
+  color:#087c62;
+  font-size:9px;
+  font-weight:bold;
 }
-input,select,textarea {
-  width:100%;padding:13px;border:1px solid #ccd6e1;
-  border-radius:9px;font:inherit;background:white;
+.small-category { padding:9px 0; font-size:12px; font-weight:bold; }
+.promo {
+  padding:20px;
+  border-radius:15px;
+  background:linear-gradient(145deg,#092b49,#087768);
+  color:white;
 }
-.busqueda input {flex:1;min-width:180px}
-.seccion {margin-top:30px}
-h2 {color:var(--azul)}
-.acciones,.categorias,.perfiles {
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
-  gap:13px;
+.promo h3 { font-size:22px; line-height:1.2; }
+.promo p { color:#e0f2f3; font-size:12px; line-height:1.5; }
+.promo .btn { width:100%; }
+.notice {
+  padding:12px;
+  border:1px solid #c9eee4;
+  border-radius:11px;
+  background:#f0fbf8;
+  color:#246b5e;
+  font-size:11px;
+  line-height:1.6;
 }
-.tarjeta,.panel {
-  background:white;border-radius:14px;padding:18px;
-  box-shadow:0 3px 14px #17334b0b;
+.empty { padding:20px; color:var(--gris); font-size:13px; text-align:center; }
+footer { padding:24px 12px; text-align:center; color:#8392a2; font-size:11px; }
+
+.modal-bg {
+  display:none;
+  position:fixed;
+  z-index:30;
+  inset:0;
+  padding:15px;
+  overflow:auto;
+  align-items:center;
+  justify-content:center;
+  background:#061c30c9;
 }
-.categoria {
-  text-align:center;cursor:pointer;border:1px solid #e2eaf1;
-  color:var(--texto);background:white;
+.modal-bg.open { display:flex; }
+.modal {
+  width:min(510px,100%);
+  max-height:92vh;
+  overflow:auto;
+  padding:22px;
+  border-radius:16px;
+  background:white;
 }
-.categoria:hover {border-color:var(--verde)}
-.emoji {font-size:30px;display:block;margin-bottom:9px}
-.oculto {display:none!important}
-form {display:grid;gap:13px}
-label {font-weight:bold;font-size:14px}
-.campo {display:grid;gap:6px}
-.panel {margin-top:20px}
-.resultado {margin-top:14px}
-.pie {text-align:center;color:#657386;padding:28px 12px}
-.etiqueta {
-  display:inline-block;background:#e2f7ef;color:#13785f;
-  border-radius:20px;padding:5px 10px;font-size:12px;
+.modal-head {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:17px;
 }
-.foto {
-  width:64px;height:64px;border-radius:50%;object-fit:cover;
-  background:#e6edf3;
+.modal-head h2 { margin:0; color:var(--azul); font-size:21px; }
+.close {
+  width:34px;
+  height:34px;
+  border:0;
+  border-radius:50%;
+  background:#edf2f6;
+  font-size:21px;
 }
-@media(max-width:600px) {
-  header {padding:16px}
-  nav {width:100%;gap:12px}
-  .hero {padding:26px 18px}
+.form-grid { display:grid; gap:12px; }
+.field { display:grid; gap:6px; }
+.field label { font-size:12px; font-weight:bold; }
+.field textarea { min-height:90px; resize:vertical; }
+.note { color:var(--gris); font-size:11px; line-height:1.5; }
+.hidden { display:none!important; }
+.toast {
+  position:fixed;
+  z-index:50;
+  bottom:18px;
+  left:50%;
+  transform:translateX(-50%);
+  max-width:90%;
+  padding:13px 17px;
+  border-radius:10px;
+  background:var(--azul);
+  color:white;
+  font-size:12px;
+  box-shadow:0 5px 20px #0002;
+}
+
+@media(max-width:1100px) {
+  .layout { grid-template-columns:185px minmax(0,1fr); }
+  .right-col { grid-column:2; grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .promo { grid-column:span 2; }
+  nav a:nth-child(n+4) { display:none; }
+}
+@media(max-width:720px) {
+  header { padding:11px; gap:9px; flex-wrap:wrap; }
+  .logo { font-size:22px; }
+  nav { order:3; width:100%; justify-content:space-between; gap:7px; }
+  nav a { font-size:11px; }
+  .top-search { order:2; flex-basis:100%; }
+  header>.btn { padding:9px 10px; font-size:11px; }
+  main { padding:11px; }
+  .layout { display:flex; flex-direction:column; gap:13px; }
+  .sidebar { display:none; }
+  .center { width:100%; }
+  .hero { padding:22px 16px; }
+  .hero h1 { font-size:31px; }
+  .search-row { flex-wrap:wrap; }
+  .search-row input { width:100%; }
+  .search-row .btn { width:100%; }
+  .categories { grid-template-columns:repeat(5,minmax(0,1fr)); gap:5px; }
+  .category { padding:10px 2px; font-size:9px; }
+  .emoji { font-size:21px; }
+  .right-col { display:flex; flex-direction:column; width:100%; }
+  .promo { width:100%; }
+  .post { padding:12px; }
+  .post-photo { max-height:240px; }
+  .post-actions button { font-size:10px; }
 }
 </style>
 </head>
-<body>
 
+<body>
 <header>
-  <div class="logo">Ofi<span>Nexo</span></div>
+  <a class="logo" href="#inicio" style="color:white;text-decoration:none">✣ Ofi<span>Nexo</span></a>
   <nav>
     <a href="#inicio">Inicio</a>
-    <a href="#oficios">Oficios</a>
-    <a href="#trabajadores">Trabajadores</a>
-    <a href="#acceso">Ingresar</a>
+    <a href="#categorias">Explorar</a>
+    <a href="#feed">Trabajadores</a>
+    <a href="#profesionales">Profesionales</a>
   </nav>
+  <div class="top-search">
+    <input id="topSearch" placeholder="Buscar oficio o profesional...">
+  </div>
+  <button class="btn btn-outline" onclick="abrir('login')">Ingresar</button>
+  <button class="btn" onclick="abrir('registro')">Registrarse</button>
 </header>
 
-<main>
-<section class="hero" id="inicio">
-  <h1>Encontrá a la persona indicada para tu trabajo</h1>
-  <p>Conectamos clientes con trabajadores y profesionales.
-  Buscá un oficio, conocé perfiles y empezá a organizar tu próximo trabajo.</p>
-  <div class="busqueda">
+<main id="inicio">
+<div class="layout">
+
+<aside class="sidebar card">
+  <div class="side-user">
+    <img id="sidePhoto" class="avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80" alt="Perfil">
+    <div><strong id="sideName">¡Bienvenido!</strong><br><span class="muted" id="sideRole">Comunidad OfiNexo</span></div>
+  </div>
+  <button class="side-link active" onclick="ir('inicio')"><span>⌂</span>Inicio</button>
+  <button class="side-link" onclick="ir('categorias')"><span>⌕</span>Buscar oficios</button>
+  <button class="side-link" onclick="mensaje('Las notificaciones se habilitarán al conectar las cuentas.')"><span>♧</span>Notificaciones</button>
+  <button class="side-link" onclick="mensaje('El chat estará disponible al conectar el sistema de usuarios.')"><span>✉</span>Mensajes</button>
+  <button class="side-link" onclick="mensaje('Tus solicitudes aparecerán aquí en la versión conectada.')"><span>▣</span>Mis solicitudes</button>
+  <button class="side-link" onclick="verPerfil()"><span>◎</span>Mi perfil</button>
+  <button class="side-link" onclick="mensaje('La configuración de cuenta estará disponible más adelante.')"><span>⚙</span>Configuración</button>
+  <button class="btn side-cta" onclick="abrir('publicar')">＋ Publicar trabajo</button>
+</aside>
+
+<div class="center">
+<section class="hero">
+  <div class="eyebrow">Tu comunidad de oficios</div>
+  <h1>El talento está cerca.<br>Conectalo con OfiNexo.</h1>
+  <p>Encontrá trabajadores y profesionales, conocé sus experiencias y conectá directamente con personas que saben hacer lo que necesitás.</p>
+  <div class="search-row">
     <input id="buscar" placeholder="¿Qué necesitás? Ej. plomero">
-    <input id="zona" placeholder="Ciudad o barrio">
-    <button onclick="buscarTrabajadores()">Buscar</button>
+    <input id="zona" placeholder="Ciudad o barrio aproximado">
+    <button class="btn" onclick="buscar()">Buscar</button>
   </div>
-  <p><small>Tu ubicación exacta no se muestra públicamente.</small></p>
+  <div class="trust"><span>Perfiles profesionales</span><span>Zona aproximada</span><span>Personas, no empresas</span></div>
 </section>
 
-<section class="seccion" id="acceso">
-  <h2>¿Qué querés hacer?</h2>
-  <div class="acciones">
-    <div class="tarjeta">
-      <span class="emoji">🏠</span>
-      <h3>Busco un servicio</h3>
-      <p>Registrate como cliente para describir tu necesidad.</p>
-      <button onclick="mostrar('cliente')">Registrarme como cliente</button>
-    </div>
-    <div class="tarjeta">
-      <span class="emoji">🧰</span>
-      <h3>Soy trabajador</h3>
-      <p>Creá tu perfil y presentá tus habilidades y servicios.</p>
-      <button onclick="mostrar('trabajador')">Registrarme como trabajador</button>
-    </div>
+<section id="categorias">
+  <div class="section-head"><h2>Explorá por oficio</h2></div>
+  <div class="categories">
+    <button class="category" onclick="elegir('Plomería')"><span class="emoji">🚰</span>Plomería</button>
+    <button class="category" onclick="elegir('Electricidad')"><span class="emoji">⚡</span>Electricidad</button>
+    <button class="category" onclick="elegir('Albañilería')"><span class="emoji">🧱</span>Albañilería</button>
+    <button class="category" onclick="elegir('Limpieza')"><span class="emoji">🧹</span>Limpieza</button>
+    <button class="category" onclick="elegir('Carpintería')"><span class="emoji">🪚</span>Carpintería</button>
+    <button class="category" onclick="elegir('Jardinería')"><span class="emoji">🌱</span>Jardinería</button>
+    <button class="category" onclick="elegir('Clases')"><span class="emoji">📚</span>Clases</button>
+    <button class="category" onclick="elegir('Abogacía')"><span class="emoji">⚖️</span>Abogacía</button>
+    <button class="category" onclick="elegir('Psicología')"><span class="emoji">🧠</span>Psicología</button>
+    <button class="category" onclick="elegir('Contabilidad')"><span class="emoji">🧾</span>Contabilidad</button>
   </div>
 </section>
 
-<section id="cliente" class="panel oculto">
-  <h2>Registro de cliente</h2>
-  <form onsubmit="registrar(event,'cliente')">
-    <div class="campo"><label>Nombre</label>
-      <input name="nombre" required maxlength="80" placeholder="Tu nombre"></div>
-    <div class="campo"><label>Correo electrónico</label>
-      <input name="correo" type="email" required placeholder="nombre@correo.com"></div>
-    <div class="campo"><label>Ciudad o barrio aproximado</label>
-      <input name="zona" required placeholder="Ej. La Plata"></div>
-    <div class="campo"><label>¿Qué trabajo necesitás?</label>
-      <textarea name="descripcion" required maxlength="1000" placeholder="Describí el problema o trabajo"></textarea></div>
-    <button type="submit">Continuar</button>
-    <button type="button" class="secundario" onclick="mostrar('')">Cerrar</button>
-  </form>
-</section>
-
-<section id="trabajador" class="panel oculto">
-  <h2>Registro de trabajador</h2>
-  <form onsubmit="registrar(event,'trabajador')">
-    <div class="campo"><label>Nombre o nombre profesional</label>
-      <input name="nombre" required maxlength="80"></div>
-    <div class="campo"><label>Correo electrónico</label>
-      <input name="correo" type="email" required></div>
-    <div class="campo"><label>Oficio o profesión</label>
-      <select name="oficio" required>
-        <option value="">Elegí tu especialidad</option>
-        <option>Plomería</option><option>Electricidad</option>
-        <option>Albañilería</option><option>Limpieza</option>
-        <option>Jardinería</option><option>Carpintería</option>
-        <option>Clases particulares</option><option>Abogacía</option>
-        <option>Psicología</option><option>Contabilidad</option>
-        <option>Otro oficio</option>
-      </select></div>
-    <div class="campo"><label>Ciudad o barrio aproximado</label>
-      <input name="zona" required placeholder="Ej. La Plata"></div>
-    <div class="campo"><label>Descripción de tus servicios y habilidades</label>
-      <textarea name="descripcion" required maxlength="1000"></textarea></div>
-    <div class="campo"><label>Foto de perfil (opcional en esta demo)</label>
-      <input name="foto" type="file" accept="image/*"></div>
-    <button type="submit">Crear perfil de demostración</button>
-    <button type="button" class="secundario" onclick="mostrar('')">Cerrar</button>
-  </form>
-</section>
-
-<section class="seccion" id="oficios">
-  <h2>Explorá los oficios</h2>
-  <div class="categorias">
-    <button class="categoria" onclick="elegir('Plomería')"><span class="emoji">🚰</span>Plomería</button>
-    <button class="categoria" onclick="elegir('Electricidad')"><span class="emoji">💡</span>Electricidad</button>
-    <button class="categoria" onclick="elegir('Albañilería')"><span class="emoji">🧱</span>Albañilería</button>
-    <button class="categoria" onclick="elegir('Limpieza')"><span class="emoji">🧹</span>Limpieza</button>
-    <button class="categoria" onclick="elegir('Carpintería')"><span class="emoji">🪚</span>Carpintería</button>
-    <button class="categoria" onclick="elegir('Jardinería')"><span class="emoji">🌱</span>Jardinería</button>
-    <button class="categoria" onclick="elegir('Clases particulares')"><span class="emoji">📚</span>Clases</button>
-    <button class="categoria" onclick="elegir('Abogacía')"><span class="emoji">⚖️</span>Abogacía</button>
-    <button class="categoria" onclick="elegir('Psicología')"><span class="emoji">🧠</span>Psicología</button>
-    <button class="categoria" onclick="elegir('Contabilidad')"><span class="emoji">🧾</span>Contabilidad</button>
+<section class="card composer">
+  <div class="compose-row">
+    <img class="avatar" id="composePhoto" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80" alt="">
+    <button class="compose-button" onclick="abrir('publicar')">¿Qué trabajo realizaste o qué servicio necesitás?</button>
+  </div>
+  <div class="compose-actions">
+    <button onclick="abrir('publicar')">▧ Foto o trabajo</button>
+    <button onclick="abrir('solicitud')">⌖ Solicitar servicio</button>
+    <button onclick="abrir('registro')">♙ Crear perfil</button>
   </div>
 </section>
 
-<section class="seccion" id="trabajadores">
-  <h2>Perfiles de trabajadores</h2>
-  <p>Los perfiles registrados en esta demostración aparecen acá en este dispositivo.</p>
-  <div id="resultados" class="perfiles"></div>
-</section>
-
-<section class="panel">
-  <h2>Cómo funciona OfiNexo</h2>
-  <div class="acciones">
-    <div><span class="emoji">🔎</span><strong>1. Buscá</strong><p>Encontrá el oficio que necesitás.</p></div>
-    <div><span class="emoji">👤</span><strong>2. Conocé</strong><p>Consultá la información del perfil.</p></div>
-    <div><span class="emoji">🤝</span><strong>3. Coordiná</strong><p>Organizá el trabajo con la persona elegida.</p></div>
+<section id="feed">
+  <div class="section-head"><h2>La comunidad OfiNexo</h2><span class="muted">Publicaciones</span></div>
+  <div class="filters">
+    <button class="filter active" onclick="filtrar('Todos',this)">Todos</button>
+    <button class="filter" onclick="filtrar('Electricidad',this)">Electricidad</button>
+    <button class="filter" onclick="filtrar('Plomería',this)">Plomería</button>
+    <button class="filter" onclick="filtrar('Albañilería',this)">Albañilería</button>
+    <button class="filter" onclick="filtrar('Limpieza',this)">Limpieza</button>
   </div>
+  <div class="feed" id="publicaciones"></div>
 </section>
+</div>
 
-<div id="aviso" class="panel oculto" role="status"></div>
+<aside class="right-col" id="profesionales">
+  <section class="card right-card">
+    <h3 class="right-title">⭐ Trabajadores destacados</h3>
+    <div id="trabajadores"></div>
+  </section>
+  <section class="card right-card">
+    <h3 class="right-title">Oficios populares</h3>
+    <div class="small-category">🚰 Plomería</div>
+    <div class="small-category">⚡ Electricidad</div>
+    <div class="small-category">🧱 Albañilería</div>
+    <div class="small-category">🧹 Limpieza</div>
+    <div class="small-category">📚 Clases particulares</div>
+  </section>
+  <section class="promo">
+    <div class="eyebrow">Crecer juntos</div>
+    <h3>Tu oficio merece ser conocido.</h3>
+    <p>Mostrá tu experiencia, publicá tus trabajos y preparate para conectar con nuevos clientes.</p>
+    <button class="btn" onclick="abrir('registro')">Sumarme a OfiNexo</button>
+  </section>
+  <section class="notice">
+    🔒 <strong>Tu privacidad importa.</strong><br>
+    La ubicación se muestra como zona aproximada. Esta es una demostración; todavía no hay cuentas verificadas ni base de datos compartida.
+  </section>
+</aside>
+</div>
 </main>
 
-<footer class="pie">
-  <strong>OfiNexo</strong><br>
-  Conectemos clientes con trabajadores y profesionales.<br>
-  <small>Versión inicial de demostración.</small>
-</footer>
+<footer>© 2026 OfiNexo · Conectamos clientes con trabajadores y profesionales.</footer>
+
+<!-- REGISTRO -->
+<div class="modal-bg" id="modal-registro" onclick="cerrarFondo(event,'registro')">
+  <div class="modal">
+    <div class="modal-head"><h2>Unite a OfiNexo</h2><button class="close" onclick="cerrar('registro')">×</button></div>
+    <form class="form-grid" id="formRegistro">
+      <div class="field"><label>Tipo de cuenta</label>
+        <select name="tipo" id="tipo" required>
+          <option value="Cliente">Soy cliente: busco un servicio</option>
+          <option value="Trabajador">Soy trabajador: ofrezco servicios</option>
+        </select>
+      </div>
+      <div class="field"><label>Nombre o nombre profesional</label><input name="nombre" required maxlength="80" placeholder="Tu nombre"></div>
+      <div class="field"><label>Correo electrónico</label><input name="correo" type="email" required placeholder="nombre@correo.com"></div>
+      <div class="field"><label>Ciudad o barrio aproximado</label><input name="zona" required placeholder="Ej. La Plata"></div>
+      <div class="field worker-only hidden"><label>Oficio o profesión</label>
+        <select name="oficio">
+          <option value="">Elegí tu especialidad</option>
+          <option>Plomería</option><option>Electricidad</option><option>Albañilería</option>
+          <option>Limpieza</option><option>Carpintería</option><option>Jardinería</option>
+          <option>Clases particulares</option><option>Abogacía</option><option>Psicología</option>
+          <option>Contabilidad</option><option>Otro oficio</option>
+        </select>
+      </div>
+      <div class="field worker-only hidden"><label>Experiencia y habilidades</label><textarea name="descripcion" maxlength="1000" placeholder="Contá qué sabés hacer"></textarea></div>
+      <div class="field"><label>Foto de perfil (opcional)</label><input name="foto" type="file" accept="image/*"></div>
+      <button class="btn" type="submit">Crear perfil de demostración</button>
+      <p class="note">El perfil se guarda solo en esta demostración. Todavía no crea una cuenta segura ni publica tus datos en un servidor.</p>
+    </form>
+  </div>
+</div>
+
+<!-- INGRESO -->
+<div class="modal-bg" id="modal-login" onclick="cerrarFondo(event,'login')">
+  <div class="modal">
+    <div class="modal-head"><h2>Ingresar a OfiNexo</h2><button class="close" onclick="cerrar('login')">×</button></div>
+    <form class="form-grid" id="formLogin">
+      <div class="field"><label>Correo electrónico</label><input type="email" name="correo" required placeholder="nombre@correo.com"></div>
+      <p class="note">El inicio de sesión seguro se habilitará al conectar el sistema de autenticación. Por ahora podés probar el registro de demostración.</p>
+      <button class="btn" type="submit">Continuar</button>
+      <button class="btn btn-white" type="button" onclick="cerrar('login');abrir('registro')">Crear una cuenta</button>
+    </form>
+  </div>
+</div>
+
+<!-- PUBLICACIÓN -->
+<div class="modal-bg" id="modal-publicar" onclick="cerrarFondo(event,'publicar')">
+  <div class="modal">
+    <div class="modal-head"><h2>Publicá tu trabajo</h2><button class="close" onclick="cerrar('publicar')">×</button></div>
+    <form class="form-grid" id="formPublicar">
+      <div class="field"><label>Nombre profesional</label><input name="nombre" required placeholder="Tu nombre"></div>
+      <div class="field"><label>Oficio</label>
+        <select name="oficio" required>
+          <option value="">Elegí tu oficio</option><option>Plomería</option><option>Electricidad</option>
+          <option>Albañilería</option><option>Limpieza</option><option>Carpintería</option>
+          <option>Jardinería</option><option>Clases</option><option>Otro oficio</option>
+        </select>
+      </div>
+      <div class="field"><label>Zona aproximada</label><input name="zona" required placeholder="Ej. La Plata"></div>
+      <div class="field"><label>Descripción del trabajo</label><textarea name="texto" required maxlength="1200" placeholder="Contá qué trabajo hiciste"></textarea></div>
+      <div class="field"><label>Foto del trabajo (opcional)</label><input name="foto" type="file" accept="image/*"></div>
+      <button class="btn" type="submit">Publicar en la demostración</button>
+      <p class="note">No publiques fotos con rostros, domicilios ni datos privados de clientes. Esta versión no difumina automáticamente las imágenes.</p>
+    </form>
+  </div>
+</div>
+
+<!-- SOLICITUD DE CLIENTE -->
+<div class="modal-bg" id="modal-solicitud" onclick="cerrarFondo(event,'solicitud')">
+  <div class="modal">
+    <div class="modal-head"><h2>Solicitar un servicio</h2><button class="close" onclick="cerrar('solicitud')">×</button></div>
+    <form class="form-grid" id="formSolicitud">
+      <div class="field"><label>¿Qué necesitás resolver?</label><textarea name="necesidad" required maxlength="1000" placeholder="Describí el problema o trabajo"></textarea></div>
+      <div class="field"><label>Oficio</label>
+        <select name="oficio" required>
+          <option value="">Elegí una categoría</option><option>Plomería</option><option>Electricidad</option>
+          <option>Albañilería</option><option>Limpieza</option><option>Carpintería</option>
+          <option>Jardinería</option><option>Clases particulares</option><option>Otro oficio</option>
+        </select>
+      </div>
+      <div class="field"><label>Zona aproximada</label><input name="zona" required placeholder="Ej. La Plata"></div>
+      <div class="field"><label>Correo de contacto</label><input name="correo" type="email" required placeholder="nombre@correo.com"></div>
+      <button class="btn" type="submit">Preparar solicitud</button>
+      <p class="note">Esta solicitud no se envía a trabajadores reales hasta conectar la base de datos.</p>
+    </form>
+  </div>
+</div>
+
+<div class="modal-bg" id="modal-perfil" onclick="cerrarFondo(event,'perfil')">
+  <div class="modal">
+    <div class="modal-head"><h2>Mi perfil</h2><button class="close" onclick="cerrar('perfil')">×</button></div>
+    <div id="perfilContenido" class="empty">Todavía no creaste un perfil en esta demostración.</div>
+  </div>
+</div>
+
+<div id="avisos" aria-live="polite"></div>
 
 <script>
-const perfiles = [];
+const fotos = {
+  juan:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=140&q=80",
+  laura:"https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=140&q=80",
+  diego:"https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=140&q=80",
+  flor:"https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=140&q=80"
+};
 
-function mostrar(id) {
-  ['cliente','trabajador'].forEach(x =>
-    document.getElementById(x).classList.toggle('oculto',x!==id)
-  );
-  if(id) document.getElementById(id).scrollIntoView({behavior:'smooth'});
+const ejemplosTrabajadores = [
+ {nombre:"Juan Pérez",oficio:"Plomería",zona:"La Plata",nota:"4.9",opiniones:128,descripcion:"Instalaciones, reparación de pérdidas y mantenimiento del hogar.",foto:fotos.juan},
+ {nombre:"Laura Gómez",oficio:"Electricidad",zona:"La Plata",nota:"4.8",opiniones:96,descripcion:"Instalaciones eléctricas, iluminación y mantenimiento.",foto:fotos.laura},
+ {nombre:"Diego Fernández",oficio:"Albañilería",zona:"Tolosa",nota:"4.7",opiniones:83,descripcion:"Arreglos, cerámicos y pequeñas reformas.",foto:fotos.diego},
+ {nombre:"Florencia Rojas",oficio:"Limpieza",zona:"La Plata",nota:"4.9",opiniones:112,descripcion:"Limpieza de hogares, oficinas y espacios después de obra.",foto:fotos.flor}
+];
+
+const ejemplosPublicaciones = [
+ {nombre:"Carlos Mendoza",oficio:"Electricidad",zona:"La Plata",tiempo:"Hace 2 horas",foto:fotos.diego,imagen:"https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1000&q=80",texto:"Instalación de tablero eléctrico en una vivienda. Trabajo realizado con cuidado y atención a los detalles. ¡Gracias por la confianza!",likes:42,comentarios:12},
+ {nombre:"María González",oficio:"Psicología",zona:"La Plata",tiempo:"Hace 4 horas",foto:fotos.laura,imagen:"https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1000&q=80",texto:"Acompañar a las personas también es parte de construir una comunidad más fuerte. Presento mi espacio de orientación profesional.",likes:27,comentarios:8},
+ {nombre:"Juan Pérez",oficio:"Plomería",zona:"La Plata",tiempo:"Ayer",foto:fotos.juan,imagen:"https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=1000&q=80",texto:"Reparación de una pérdida de agua y revisión de conexiones. Siempre es mejor detectar el problema a tiempo.",likes:31,comentarios:6}
+];
+
+let trabajadores = [];
+let publicaciones = [];
+let usuarioActual = null;
+let filtroActual = "Todos";
+
+function escapar(valor) {
+  return String(valor ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  })[c]);
 }
 
-function avisar(mensaje) {
-  const a=document.getElementById('aviso');
-  a.textContent=mensaje;
-  a.classList.remove('oculto');
-  a.scrollIntoView({behavior:'smooth',block:'center'});
+function abrir(nombre) {
+  document.getElementById("modal-"+nombre).classList.add("open");
+  document.body.style.overflow="hidden";
+}
+function cerrar(nombre) {
+  document.getElementById("modal-"+nombre).classList.remove("open");
+  document.body.style.overflow="";
+}
+function cerrarFondo(event,nombre) {
+  if(event.target.id==="modal-"+nombre) cerrar(nombre);
+}
+function ir(id) {
+  document.getElementById(id)?.scrollIntoView({behavior:"smooth"});
+}
+function mensaje(texto) {
+  const caja=document.getElementById("avisos");
+  caja.innerHTML="";
+  const aviso=document.createElement("div");
+  aviso.className="toast";
+  aviso.textContent=texto;
+  caja.appendChild(aviso);
+  setTimeout(()=>aviso.remove(),3500);
 }
 
-function registrar(event,tipo) {
-  event.preventDefault();
-  const datos=Object.fromEntries(new FormData(event.target).entries());
-
-  if(tipo==='trabajador') {
-    perfiles.push({
-      nombre:datos.nombre,
-      oficio:datos.oficio,
-      zona:datos.zona,
-      descripcion:datos.descripcion
-    });
-    dibujar(perfiles);
-    avisar('Perfil de demostración creado en esta página. Todavía no es una cuenta permanente ni está publicado en un servidor de usuarios.');
-  } else {
-    avisar('Solicitud de demostración preparada. Para recibirla y guardarla realmente, OfiNexo necesita una base de datos y un sistema de cuentas.');
+function renderTrabajadores(lista) {
+  const caja=document.getElementById("trabajadores");
+  caja.innerHTML="";
+  if(!lista.length) {
+    caja.innerHTML='<div class="empty">No encontramos perfiles con esos filtros.</div>';
+    return;
   }
-  event.target.reset();
-}
-
-function elegir(oficio) {
-  document.getElementById('buscar').value=oficio;
-  buscarTrabajadores();
-  document.getElementById('trabajadores').scrollIntoView({behavior:'smooth'});
-}
-
-function buscarTrabajadores() {
-  const q=document.getElementById('buscar').value.trim().toLowerCase();
-  const z=document.getElementById('zona').value.trim().toLowerCase();
-  const encontrados=perfiles.filter(p =>
-    (!q || p.oficio.toLowerCase().includes(q) ||
-      p.descripcion.toLowerCase().includes(q)) &&
-    (!z || p.zona.toLowerCase().includes(z))
-  );
-  dibujar(encontrados);
-  if(!encontrados.length)
-    avisar('Todavía no hay perfiles de demostración que coincidan. Cuando se conecte la base de datos, se podrán buscar trabajadores registrados.');
-}
-
-function dibujar(lista) {
-  const cont=document.getElementById('resultados');
-  cont.replaceChildren();
-  lista.forEach(p=>{
-    const tarjeta=document.createElement('article');
-    tarjeta.className='tarjeta';
-    const titulo=document.createElement('h3');
-    titulo.textContent=p.nombre;
-    const oficio=document.createElement('p');
-    oficio.textContent=p.oficio;
-    const zona=document.createElement('p');
-    zona.textContent='📍 Zona aproximada: '+p.zona;
-    const desc=document.createElement('p');
-    desc.textContent=p.descripcion;
-    const estado=document.createElement('span');
-    estado.className='etiqueta';
-    estado.textContent='Perfil de demostración';
-    tarjeta.append(titulo,oficio,zona,desc,estado);
-    cont.appendChild(tarjeta);
+  lista.slice(0,8).forEach(t=>{
+    const fila=document.createElement("div");
+    fila.className="worker-row";
+    fila.innerHTML=`
+      <img class="avatar" src="${escapar(t.foto||fotos.juan)}" alt="">
+      <div class="info">
+        <strong>${escapar(t.nombre)}</strong>
+        <div class="sub">${escapar(t.oficio)} · ${escapar(t.zona)}</div>
+        <div class="rating">★ ${escapar(t.nota||"Nuevo")} <span class="muted">(${Number(t.opiniones)||0})</span></div>
+      </div>
+      <span class="available">Perfil</span>`;
+    caja.appendChild(fila);
   });
 }
+
+function renderPublicaciones() {
+  const caja=document.getElementById("publicaciones");
+  caja.innerHTML="";
+  const todas=publicaciones.concat(ejemplosPublicaciones);
+  const lista=todas.filter(p=>filtroActual==="Todos" ||
+    p.oficio.toLowerCase().includes(filtroActual.toLowerCase()));
+  if(!lista.length) {
+    caja.innerHTML='<div class="card empty">Todavía no hay publicaciones en esta categoría.</div>';
+    return;
+  }
+
+  lista.forEach((p,i)=>{
+    const tarjeta=document.createElement("article");
+    tarjeta.className="card post";
+    tarjeta.innerHTML=`
+      <div class="post-head">
+        <img class="avatar" src="${escapar(p.foto||fotos.juan)}" alt="">
+        <div class="post-person">
+          <strong>${escapar(p.nombre)} <span class="verified">●</span></strong>
+          <div class="post-meta">${escapar(p.oficio)} · ${escapar(p.zona)} · ${escapar(p.tiempo||"Ahora")}</div>
+        </div>
+        <button class="link-btn" onclick="mensaje('Las opciones de publicación estarán disponibles en una versión posterior.')">•••</button>
+      </div>
+      <p>${escapar(p.texto)}</p>
+      ${p.imagen?`<img class="post-photo" src="${escapar(p.imagen)}" alt="Trabajo publicado">`:""}
+      <span class="tag">${escapar(p.oficio)}</span>
+      <span class="tag">Zona aproximada: ${escapar(p.zona)}</span>
+      <div class="post-stats">
+        <span>👍 💚 <b>${Number(p.likes)||0}</b> reacciones</span>
+        <span>${Number(p.comentarios)||0} comentarios</span>
+      </div>
+      <div class="post-actions">
+        <button onclick="darMeGusta(this)">♡ Me gusta</button>
+        <button onclick="mensaje('Los comentarios se habilitarán al conectar la base de datos.')">▢ Comentar</button>
+        <button onclick="mensaje('Compartir estará disponible en la próxima versión.')">↗ Compartir</button>
+        <button onclick="mensaje('El contacto directo requiere cuentas seguras.')">✉ Contactar</button>
+      </div>`;
+    caja.appendChild(tarjeta);
+  });
+}
+
+function darMeGusta(boton) {
+  const contador=boton.closest(".post").querySelector(".post-stats b");
+  contador.textContent=Number(contador.textContent)+1;
+  boton.textContent="♥ Te gusta";
+  boton.disabled=true;
+}
+function filtrar(filtro,boton) {
+  filtroActual=filtro;
+  document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
+  boton.classList.add("active");
+  renderPublicaciones();
+}
+function elegir(oficio) {
+  document.getElementById("buscar").value=oficio;
+  buscar();
+}
+function buscar() {
+  const q=document.getElementById("buscar").value.trim().toLowerCase();
+  const z=document.getElementById("zona").value.trim().toLowerCase();
+  const todos=trabajadores.concat(ejemplosTrabajadores);
+  const encontrados=todos.filter(t=>
+    (!q || t.oficio.toLowerCase().includes(q) ||
+      t.nombre.toLowerCase().includes(q) ||
+      (t.descripcion||"").toLowerCase().includes(q)) &&
+    (!z || t.zona.toLowerCase().includes(z))
+  );
+  renderTrabajadores(encontrados);
+  ir("profesionales");
+  if(!encontrados.length) mensaje("No encontramos perfiles de ejemplo. La búsqueda real necesitará una base de datos.");
+}
+
+document.getElementById("topSearch").addEventListener("keydown",e=>{
+  if(e.key==="Enter") {
+    document.getElementById("buscar").value=e.target.value;
+    buscar();
+  }
+});
+
+document.getElementById("tipo").addEventListener("change",e=>{
+  document.querySelectorAll(".worker-only").forEach(c=>{
+    c.classList.toggle("hidden",e.target.value!=="Trabajador");
+  });
+});
+
+async function leerFoto(file) {
+  if(!file || !file.size) return "";
+  if(!file.type.startsWith("image/")) throw Error("Elegí un archivo de imagen.");
+  if(file.size>1200000) throw Error("La imagen debe pesar menos de 1,2 MB en esta demo.");
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=()=>resolve(reader.result);
+    reader.onerror=()=>reject(Error("No se pudo leer la imagen."));
+    reader.readAsDataURL(file);
+  });
+}
+
+document.getElementById("formRegistro").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const f=e.target;
+  const d=new FormData(f);
+  try {
+    const foto=await leerFoto(d.get("foto"));
+    usuarioActual={
+      nombre:d.get("nombre"),correo:d.get("correo"),tipo:d.get("tipo"),
+      zona:d.get("zona"),oficio:d.get("oficio")||"",
+      descripcion:d.get("descripcion")||"",foto
+    };
+    if(usuarioActual.tipo==="Trabajador") {
+      trabajadores.unshift({
+        nombre:usuarioActual.nombre,oficio:usuarioActual.oficio||"Otro oficio",
+        zona:usuarioActual.zona,descripcion:usuarioActual.descripcion,
+        foto:foto||fotos.juan,nota:"Nuevo",opiniones:0
+      });
+      renderTrabajadores(trabajadores.concat(ejemplosTrabajadores));
+    }
+    document.getElementById("sideName").textContent=usuarioActual.nombre;
+    document.getElementById("sideRole").textContent=usuarioActual.tipo+" · "+usuarioActual.zona;
+    if(foto) {
+      document.getElementById("sidePhoto").src=foto;
+      document.getElementById("composePhoto").src=foto;
+    }
+    renderPerfil();
+    f.reset();
+    document.querySelectorAll(".worker-only").forEach(c=>c.classList.add("hidden"));
+    cerrar("registro");
+    mensaje("Perfil de demostración creado. Todavía no es una cuenta permanente.");
+  } catch(error) {
+    mensaje(error.message);
+  }
+});
+
+document.getElementById("formPublicar").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const f=e.target;
+  const d=new FormData(f);
+  try {
+    const imagen=await leerFoto(d.get("foto"));
+    publicaciones.unshift({
+      nombre:d.get("nombre"),oficio:d.get("oficio"),zona:d.get("zona"),
+      texto:d.get("texto"),imagen,foto:usuarioActual?.foto||"",
+      tiempo:"Ahora",likes:0,comentarios:0
+    });
+    f.reset();
+    cerrar("publicar");
+    renderPublicaciones();
+    mensaje("Publicación agregada a esta demostración.");
+    ir("feed");
+  } catch(error) {
+    mensaje(error.message);
+  }
+});
+
+document.getElementById("formSolicitud").addEventListener("submit",e=>{
+  e.preventDefault();
+  const d=new FormData(e.target);
+  const solicitud={
+    necesidad:d.get("necesidad"),oficio:d.get("oficio"),
+    zona:d.get("zona"),correo:d.get("correo")
+  };
+  e.target.reset();
+  cerrar("solicitud");
+  mensaje("Solicitud preparada para "+solicitud.oficio+". Todavía no fue enviada a trabajadores.");
+});
+
+document.getElementById("formLogin").addEventListener("submit",e=>{
+  e.preventDefault();
+  cerrar("login");
+  mensaje("El ingreso seguro se habilitará al conectar la autenticación.");
+});
+
+function renderPerfil() {
+  const caja=document.getElementById("perfilContenido");
+  if(!usuarioActual) {
+    caja.textContent="Todavía no creaste un perfil en esta demostración.";
+    return;
+  }
+  caja.innerHTML=`
+    <div style="height:75px;border-radius:12px;background:linear-gradient(110deg,#092b49,#08b99a)"></div>
+    <div style="display:flex;gap:12px;align-items:center;margin-top:-25px;padding:0 12px">
+      <img class="avatar" style="width:65px;height:65px;border:4px solid white" src="${escapar(usuarioActual.foto||fotos.juan)}" alt="">
+      <div><strong>${escapar(usuarioActual.nombre)}</strong><br><span class="tag">${escapar(usuarioActual.tipo)}</span></div>
+    </div>
+    <div style="padding:12px">
+      <h3>${escapar(usuarioActual.oficio||"Perfil de cliente")}</h3>
+      <p class="muted">Zona aproximada: ${escapar(usuarioActual.zona)}</p>
+      <p>${escapar(usuarioActual.descripcion||"Todavía no agregaste una descripción.")}</p>
+      <div class="notice">Este perfil es local y de demostración. Para iniciar sesión desde otros dispositivos y proteger las cuentas, necesitaremos conectar una base de datos y autenticación.</div>
+    </div>`;
+}
+function verPerfil() {
+  renderPerfil();
+  abrir("perfil");
+}
+
+renderTrabajadores(ejemplosTrabajadores);
+renderPublicaciones();
 </script>
 </body>
 </html>
+
 
 
