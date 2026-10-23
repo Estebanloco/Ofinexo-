@@ -2,354 +2,307 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#103b54">
-  <title>OfiNexo | Oficios y profesionales</title>
-  <style>
-    :root {
-      --azul: #103b54;
-      --turquesa: #13b8a6;
-      --fondo: #f3f7fa;
-      --texto: #203443;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: var(--fondo);
-      color: var(--texto);
-    }
-    header {
-      background: var(--azul);
-      color: white;
-      padding: 17px 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .logo { font-size: 25px; font-weight: 800; }
-    .logo span { color: #49e1ce; }
-    header small { display: block; margin-top: 5px; }
-    main { max-width: 1000px; margin: auto; padding: 22px 15px 45px; }
-    .hero {
-      background: linear-gradient(135deg, #103b54, #176c78);
-      color: white;
-      padding: 28px 22px;
-      border-radius: 18px;
-      margin-bottom: 20px;
-    }
-    h1 { font-size: clamp(26px, 5vw, 38px); margin: 0 0 12px; }
-    h2 { margin-top: 0; }
-    p { line-height: 1.5; }
-    .botones, .acciones {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
-    }
-    button {
-      border: 0;
-      border-radius: 10px;
-      padding: 13px 16px;
-      font-weight: bold;
-      font-size: 15px;
-      cursor: pointer;
-      background: var(--turquesa);
-      color: #073b3b;
-    }
-    button.secundario { background: white; color: var(--azul); }
-    button.azul { background: var(--azul); color: white; }
-    .panel, .tarjeta {
-      background: white;
-      border-radius: 15px;
-      padding: 20px;
-      margin-bottom: 17px;
-      box-shadow: 0 3px 14px #102d3b0d;
-    }
-    .rejilla {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px;
-    }
-    label { display: block; font-weight: bold; margin: 14px 0 6px; }
-    input, select, textarea {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #cbd7df;
-      border-radius: 9px;
-      font: inherit;
-      background: white;
-    }
-    textarea { min-height: 95px; resize: vertical; }
-    .oculto { display: none !important; }
-    .etiqueta {
-      display: inline-block;
-      background: #e0f7f3;
-      color: #086c61;
-      border-radius: 20px;
-      padding: 6px 10px;
-      font-size: 13px;
-      margin: 3px;
-    }
-    .icono {
-      font-size: 32px;
-      background: #e5f5f7;
-      width: 58px;
-      height: 58px;
-      display: grid;
-      place-items: center;
-      border-radius: 15px;
-      margin-bottom: 10px;
-    }
-    .muted { color: #647785; font-size: 14px; }
-    .mensaje { padding: 12px; background: #e6f7ef; border-radius: 9px; margin-top: 12px; }
-    footer { text-align: center; color: #637783; padding: 25px 12px; }
-    @media (max-width: 500px) {
-      header { align-items: flex-start; }
-      .botones button, .acciones button { flex: 1 1 100%; }
-      .panel, .tarjeta { padding: 16px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#102b46">
+<meta name="description" content="OfiNexo conecta clientes con trabajadores y profesionales.">
+<title>OfiNexo | Conectamos personas y oficios</title>
+<style>
+:root {
+  --azul:#102b46;
+  --azul2:#194e78;
+  --verde:#16a085;
+  --fondo:#f2f6fa;
+  --texto:#203044;
+}
+* {box-sizing:border-box}
+body {
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--fondo);
+  color:var(--texto);
+}
+header {
+  background:var(--azul);
+  color:white;
+  padding:18px 5%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+.logo {font-size:27px;font-weight:bold}
+.logo span {color:#42d6ad}
+nav {display:flex;gap:15px;flex-wrap:wrap}
+nav a {color:white;text-decoration:none;font-size:14px}
+button,.boton {
+  border:0;border-radius:10px;padding:12px 16px;
+  background:var(--verde);color:white;font-weight:bold;
+  cursor:pointer;text-decoration:none;display:inline-block;
+}
+button.secundario,.secundario {
+  background:white;color:var(--azul);
+  border:1px solid #d4deea;
+}
+main {max-width:1100px;margin:auto;padding:22px 16px}
+.hero {
+  background:linear-gradient(135deg,#102b46,#21638a);
+  color:white;border-radius:20px;padding:34px 24px;
+}
+.hero h1 {font-size:clamp(29px,5vw,45px);margin:0 0 14px}
+.hero p {line-height:1.7;max-width:650px}
+.busqueda {
+  display:flex;gap:10px;flex-wrap:wrap;margin-top:22px;
+}
+input,select,textarea {
+  width:100%;padding:13px;border:1px solid #ccd6e1;
+  border-radius:9px;font:inherit;background:white;
+}
+.busqueda input {flex:1;min-width:180px}
+.seccion {margin-top:30px}
+h2 {color:var(--azul)}
+.acciones,.categorias,.perfiles {
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
+  gap:13px;
+}
+.tarjeta,.panel {
+  background:white;border-radius:14px;padding:18px;
+  box-shadow:0 3px 14px #17334b0b;
+}
+.categoria {
+  text-align:center;cursor:pointer;border:1px solid #e2eaf1;
+  color:var(--texto);background:white;
+}
+.categoria:hover {border-color:var(--verde)}
+.emoji {font-size:30px;display:block;margin-bottom:9px}
+.oculto {display:none!important}
+form {display:grid;gap:13px}
+label {font-weight:bold;font-size:14px}
+.campo {display:grid;gap:6px}
+.panel {margin-top:20px}
+.resultado {margin-top:14px}
+.pie {text-align:center;color:#657386;padding:28px 12px}
+.etiqueta {
+  display:inline-block;background:#e2f7ef;color:#13785f;
+  border-radius:20px;padding:5px 10px;font-size:12px;
+}
+.foto {
+  width:64px;height:64px;border-radius:50%;object-fit:cover;
+  background:#e6edf3;
+}
+@media(max-width:600px) {
+  header {padding:16px}
+  nav {width:100%;gap:12px}
+  .hero {padding:26px 18px}
+}
+</style>
 </head>
 <body>
+
 <header>
-  <div>
-    <div class="logo">Ofi<span>Nexo</span></div>
-    <small>Conectamos clientes con trabajadores y profesionales</small>
-  </div>
-  <button class="secundario" onclick="mostrar('inicio')">Inicio</button>
+  <div class="logo">Ofi<span>Nexo</span></div>
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#oficios">Oficios</a>
+    <a href="#trabajadores">Trabajadores</a>
+    <a href="#acceso">Ingresar</a>
+  </nav>
 </header>
 
 <main>
-  <section id="inicio">
-    <div class="hero">
-      <h1>Encontrá a la persona indicada para tu trabajo</h1>
-      <p>OfiNexo conecta directamente a quienes necesitan un servicio con trabajadores y profesionales independientes.</p>
-      <div class="botones">
-        <button onclick="abrirRegistro('cliente')">Soy cliente</button>
-        <button class="secundario" onclick="abrirRegistro('trabajador')">Soy trabajador</button>
-      </div>
+<section class="hero" id="inicio">
+  <h1>Encontrá a la persona indicada para tu trabajo</h1>
+  <p>Conectamos clientes con trabajadores y profesionales.
+  Buscá un oficio, conocé perfiles y empezá a organizar tu próximo trabajo.</p>
+  <div class="busqueda">
+    <input id="buscar" placeholder="¿Qué necesitás? Ej. plomero">
+    <input id="zona" placeholder="Ciudad o barrio">
+    <button onclick="buscarTrabajadores()">Buscar</button>
+  </div>
+  <p><small>Tu ubicación exacta no se muestra públicamente.</small></p>
+</section>
+
+<section class="seccion" id="acceso">
+  <h2>¿Qué querés hacer?</h2>
+  <div class="acciones">
+    <div class="tarjeta">
+      <span class="emoji">🏠</span>
+      <h3>Busco un servicio</h3>
+      <p>Registrate como cliente para describir tu necesidad.</p>
+      <button onclick="mostrar('cliente')">Registrarme como cliente</button>
     </div>
-
-    <div class="panel">
-      <h2>¿Qué servicio necesitás?</h2>
-      <label for="busqueda">Oficio o especialidad</label>
-      <input id="busqueda" placeholder="Ej.: plomero, electricista, limpieza">
-      <label for="zona">Localidad o barrio aproximado</label>
-      <input id="zona" placeholder="Ej.: La Plata, City Bell">
-      <p class="muted">No ingreses tu dirección exacta. La ubicación aproximada protege tu privacidad.</p>
-      <button onclick="buscar()">Buscar trabajadores</button>
+    <div class="tarjeta">
+      <span class="emoji">🧰</span>
+      <h3>Soy trabajador</h3>
+      <p>Creá tu perfil y presentá tus habilidades y servicios.</p>
+      <button onclick="mostrar('trabajador')">Registrarme como trabajador</button>
     </div>
+  </div>
+</section>
 
-    <h2>Oficios y especialidades</h2>
-    <div class="rejilla" id="categorias"></div>
+<section id="cliente" class="panel oculto">
+  <h2>Registro de cliente</h2>
+  <form onsubmit="registrar(event,'cliente')">
+    <div class="campo"><label>Nombre</label>
+      <input name="nombre" required maxlength="80" placeholder="Tu nombre"></div>
+    <div class="campo"><label>Correo electrónico</label>
+      <input name="correo" type="email" required placeholder="nombre@correo.com"></div>
+    <div class="campo"><label>Ciudad o barrio aproximado</label>
+      <input name="zona" required placeholder="Ej. La Plata"></div>
+    <div class="campo"><label>¿Qué trabajo necesitás?</label>
+      <textarea name="descripcion" required maxlength="1000" placeholder="Describí el problema o trabajo"></textarea></div>
+    <button type="submit">Continuar</button>
+    <button type="button" class="secundario" onclick="mostrar('')">Cerrar</button>
+  </form>
+</section>
 
-    <h2>Trabajadores de demostración</h2>
-    <p class="muted">Estos perfiles son ejemplos para probar el diseño, no trabajadores verificados.</p>
-    <div class="rejilla" id="perfiles"></div>
-  </section>
+<section id="trabajador" class="panel oculto">
+  <h2>Registro de trabajador</h2>
+  <form onsubmit="registrar(event,'trabajador')">
+    <div class="campo"><label>Nombre o nombre profesional</label>
+      <input name="nombre" required maxlength="80"></div>
+    <div class="campo"><label>Correo electrónico</label>
+      <input name="correo" type="email" required></div>
+    <div class="campo"><label>Oficio o profesión</label>
+      <select name="oficio" required>
+        <option value="">Elegí tu especialidad</option>
+        <option>Plomería</option><option>Electricidad</option>
+        <option>Albañilería</option><option>Limpieza</option>
+        <option>Jardinería</option><option>Carpintería</option>
+        <option>Clases particulares</option><option>Abogacía</option>
+        <option>Psicología</option><option>Contabilidad</option>
+        <option>Otro oficio</option>
+      </select></div>
+    <div class="campo"><label>Ciudad o barrio aproximado</label>
+      <input name="zona" required placeholder="Ej. La Plata"></div>
+    <div class="campo"><label>Descripción de tus servicios y habilidades</label>
+      <textarea name="descripcion" required maxlength="1000"></textarea></div>
+    <div class="campo"><label>Foto de perfil (opcional en esta demo)</label>
+      <input name="foto" type="file" accept="image/*"></div>
+    <button type="submit">Crear perfil de demostración</button>
+    <button type="button" class="secundario" onclick="mostrar('')">Cerrar</button>
+  </form>
+</section>
 
-  <section id="registro" class="panel oculto">
-    <h2 id="tituloRegistro">Crear cuenta</h2>
-    <p id="descripcionRegistro">Completá tus datos.</p>
-    <form id="formRegistro">
-      <label for="nombre">Nombre y apellido</label>
-      <input id="nombre" required maxlength="80" autocomplete="name">
-      <label for="correo">Correo electrónico</label>
-      <input id="correo" type="email" required autocomplete="email">
-      <label for="clave">Contraseña para la demostración</label>
-      <input id="clave" type="password" required minlength="8" autocomplete="new-password">
-      <p class="muted">Esta versión no envía ni protege cuentas en un servidor. No uses una contraseña real.</p>
-      <div id="camposTrabajador" class="oculto">
-        <label for="oficio">Tu oficio o profesión</label>
-        <select id="oficio">
-          <option value="">Elegí una especialidad</option>
-        </select>
-        <label for="descripcion">Descripción de tus servicios</label>
-        <textarea id="descripcion" maxlength="600" placeholder="Contá qué trabajos realizás y cuáles son tus habilidades."></textarea>
-        <label for="ubicacion">Localidad o barrio aproximado</label>
-        <input id="ubicacion" placeholder="Ej.: La Plata">
-      </div>
-      <div class="acciones">
-        <button type="submit">Crear perfil de demostración</button>
-        <button type="button" class="azul" onclick="mostrar('inicio')">Volver</button>
-      </div>
-      <div id="resultadoRegistro" aria-live="polite"></div>
-    </form>
-  </section>
+<section class="seccion" id="oficios">
+  <h2>Explorá los oficios</h2>
+  <div class="categorias">
+    <button class="categoria" onclick="elegir('Plomería')"><span class="emoji">🚰</span>Plomería</button>
+    <button class="categoria" onclick="elegir('Electricidad')"><span class="emoji">💡</span>Electricidad</button>
+    <button class="categoria" onclick="elegir('Albañilería')"><span class="emoji">🧱</span>Albañilería</button>
+    <button class="categoria" onclick="elegir('Limpieza')"><span class="emoji">🧹</span>Limpieza</button>
+    <button class="categoria" onclick="elegir('Carpintería')"><span class="emoji">🪚</span>Carpintería</button>
+    <button class="categoria" onclick="elegir('Jardinería')"><span class="emoji">🌱</span>Jardinería</button>
+    <button class="categoria" onclick="elegir('Clases particulares')"><span class="emoji">📚</span>Clases</button>
+    <button class="categoria" onclick="elegir('Abogacía')"><span class="emoji">⚖️</span>Abogacía</button>
+    <button class="categoria" onclick="elegir('Psicología')"><span class="emoji">🧠</span>Psicología</button>
+    <button class="categoria" onclick="elegir('Contabilidad')"><span class="emoji">🧾</span>Contabilidad</button>
+  </div>
+</section>
 
-  <section id="solicitud" class="panel oculto">
-    <h2>Solicitar un trabajo</h2>
-    <p>Describí lo que necesitás para encontrar la especialidad adecuada.</p>
-    <form id="formSolicitud">
-      <label for="tipoTrabajo">Oficio necesario</label>
-      <select id="tipoTrabajo" required></select>
-      <label for="detalleTrabajo">¿Qué trabajo necesitás realizar?</label>
-      <textarea id="detalleTrabajo" required maxlength="1000" placeholder="Explicá brevemente el problema o trabajo."></textarea>
-      <label for="zonaTrabajo">Localidad o barrio aproximado</label>
-      <input id="zonaTrabajo" required placeholder="Ej.: La Plata">
-      <div class="acciones">
-        <button type="submit">Publicar solicitud de demostración</button>
-        <button type="button" class="azul" onclick="mostrar('inicio')">Cancelar</button>
-      </div>
-      <div id="resultadoSolicitud" aria-live="polite"></div>
-    </form>
-  </section>
+<section class="seccion" id="trabajadores">
+  <h2>Perfiles de trabajadores</h2>
+  <p>Los perfiles registrados en esta demostración aparecen acá en este dispositivo.</p>
+  <div id="resultados" class="perfiles"></div>
+</section>
 
-  <section id="oficina" class="panel oculto">
-    <h2>Bienvenido a tu oficina virtual</h2>
-    <p id="saludoOficina"></p>
-    <div id="detalleOficina"></div>
-    <h3>Herramientas de tu oficina</h3>
-    <ul>
-      <li>Presentación de tu perfil profesional.</li>
-      <li>Consulta de solicitudes de trabajo de demostración.</li>
-      <li>Preparación para futuras funciones de reputación y seguimiento.</li>
-    </ul>
-    <p class="muted">Las solicitudes y los perfiles aún no se comparten entre dispositivos.</p>
-    <button class="azul" onclick="mostrar('inicio')">Volver al inicio</button>
-  </section>
+<section class="panel">
+  <h2>Cómo funciona OfiNexo</h2>
+  <div class="acciones">
+    <div><span class="emoji">🔎</span><strong>1. Buscá</strong><p>Encontrá el oficio que necesitás.</p></div>
+    <div><span class="emoji">👤</span><strong>2. Conocé</strong><p>Consultá la información del perfil.</p></div>
+    <div><span class="emoji">🤝</span><strong>3. Coordiná</strong><p>Organizá el trabajo con la persona elegida.</p></div>
+  </div>
+</section>
+
+<div id="aviso" class="panel oculto" role="status"></div>
 </main>
 
-<footer>© <span id="anio"></span> OfiNexo · Conectando personas y oficios.</footer>
+<footer class="pie">
+  <strong>OfiNexo</strong><br>
+  Conectemos clientes con trabajadores y profesionales.<br>
+  <small>Versión inicial de demostración.</small>
+</footer>
 
 <script>
-const oficios = [
-  ["Electricidad","⚡"], ["Plomería","🔧"], ["Albañilería","🧱"],
-  ["Limpieza","🧹"], ["Pintura","🖌️"], ["Carpintería","🪚"],
-  ["Jardinería","🌱"], ["Refrigeración","❄️"], ["Mecánica","🚗"],
-  ["Abogacía","⚖️"], ["Contabilidad","📊"], ["Docencia","📚"],
-  ["Psicología","🧠"], ["Informática","💻"], ["Otros oficios","🧰"]
-];
-let tipoRegistro = "cliente";
-let perfilesLocales = [];
-let solicitudesLocales = [];
+const perfiles = [];
 
 function mostrar(id) {
-  ["inicio","registro","solicitud","oficina"].forEach(seccion => {
-    document.getElementById(seccion).classList.toggle("oculto", seccion !== id);
-  });
-  window.scrollTo({top:0, behavior:"smooth"});
+  ['cliente','trabajador'].forEach(x =>
+    document.getElementById(x).classList.toggle('oculto',x!==id)
+  );
+  if(id) document.getElementById(id).scrollIntoView({behavior:'smooth'});
 }
 
-function abrirRegistro(tipo) {
-  tipoRegistro = tipo;
-  document.getElementById("tituloRegistro").textContent =
-    tipo === "cliente" ? "Registro de cliente" : "Registro de trabajador";
-  document.getElementById("descripcionRegistro").textContent =
-    tipo === "cliente"
-      ? "Creá tu perfil para describir trabajos que necesitás."
-      : "Presentá tu oficio para que los clientes puedan conocerte.";
-  document.getElementById("camposTrabajador").classList.toggle("oculto", tipo !== "trabajador");
-  document.getElementById("resultadoRegistro").textContent = "";
-  document.getElementById("formRegistro").reset();
-  mostrar("registro");
+function avisar(mensaje) {
+  const a=document.getElementById('aviso');
+  a.textContent=mensaje;
+  a.classList.remove('oculto');
+  a.scrollIntoView({behavior:'smooth',block:'center'});
 }
 
-function cargarOficios() {
-  const opciones = oficios.map(([nombre]) =>
-    `<option value="${nombre}">${nombre}</option>`).join("");
-  document.getElementById("oficio").insertAdjacentHTML("beforeend", opciones);
-  document.getElementById("tipoTrabajo").innerHTML =
-    `<option value="">Elegí una especialidad</option>${opciones}`;
-  document.getElementById("categorias").innerHTML = oficios.map(([nombre, emoji]) => `
-    <button class="tarjeta" style="text-align:left;background:white;color:#203443"
-      onclick="seleccionarOficio('${nombre}')">
-      <div class="icono">${emoji}</div><strong>${nombre}</strong>
-    </button>`).join("");
-}
+function registrar(event,tipo) {
+  event.preventDefault();
+  const datos=Object.fromEntries(new FormData(event.target).entries());
 
-function escapar(valor) {
-  return String(valor).replace(/[&<>"']/g, c => ({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-  })[c]);
-}
-
-document.getElementById("formRegistro").addEventListener("submit", function(e) {
-  e.preventDefault();
-  const perfil = {
-    tipo: tipoRegistro,
-    nombre: document.getElementById("nombre").value.trim(),
-    correo: document.getElementById("correo").value.trim(),
-    oficio: tipoRegistro === "trabajador" ? document.getElementById("oficio").value : "",
-    descripcion: tipoRegistro === "trabajador" ? document.getElementById("descripcion").value.trim() : "",
-    ubicacion: tipoRegistro === "trabajador" ? document.getElementById("ubicacion").value.trim() : ""
-  };
-  if (tipoRegistro === "trabajador" && !perfil.oficio) {
-    document.getElementById("resultadoRegistro").textContent = "Elegí tu oficio para continuar.";
-    return;
-  }
-  perfilesLocales.push(perfil);
-  document.getElementById("resultadoRegistro").innerHTML =
-    `<div class="mensaje">Perfil de demostración creado para ${escapar(perfil.nombre)}.</div>`;
-  if (tipoRegistro === "trabajador") {
-    document.getElementById("saludoOficina").textContent = "Hola, " + perfil.nombre + ".";
-    document.getElementById("detalleOficina").innerHTML =
-      `<p><strong>Oficio:</strong> ${escapar(perfil.oficio)}</p>
-       <p><strong>Descripción:</strong> ${escapar(perfil.descripcion || "Todavía sin descripción.")}</p>
-       <p><strong>Zona aproximada:</strong> ${escapar(perfil.ubicacion || "Sin indicar")}</p>`;
-    renderPerfiles();
-    setTimeout(() => mostrar("oficina"), 700);
+  if(tipo==='trabajador') {
+    perfiles.push({
+      nombre:datos.nombre,
+      oficio:datos.oficio,
+      zona:datos.zona,
+      descripcion:datos.descripcion
+    });
+    dibujar(perfiles);
+    avisar('Perfil de demostración creado en esta página. Todavía no es una cuenta permanente ni está publicado en un servidor de usuarios.');
   } else {
-    setTimeout(() => mostrar("solicitud"), 700);
+    avisar('Solicitud de demostración preparada. Para recibirla y guardarla realmente, OfiNexo necesita una base de datos y un sistema de cuentas.');
   }
-});
-
-document.getElementById("formSolicitud").addEventListener("submit", function(e) {
-  e.preventDefault();
-  const solicitud = {
-    oficio: document.getElementById("tipoTrabajo").value,
-    detalle: document.getElementById("detalleTrabajo").value.trim(),
-    zona: document.getElementById("zonaTrabajo").value.trim()
-  };
-  solicitudesLocales.push(solicitud);
-  document.getElementById("resultadoSolicitud").innerHTML =
-    `<div class="mensaje">Solicitud de demostración creada. Oficio: ${escapar(solicitud.oficio)}. Zona: ${escapar(solicitud.zona)}.</div>`;
-});
-
-function seleccionarOficio(nombre) {
-  document.getElementById("busqueda").value = nombre;
-  buscar();
+  event.target.reset();
 }
 
-function buscar() {
-  const termino = document.getElementById("busqueda").value.trim().toLowerCase();
-  const zona = document.getElementById("zona").value.trim().toLowerCase();
-  const encontrados = perfilesLocales.filter(p => p.tipo === "trabajador" &&
-    (!termino || p.oficio.toLowerCase().includes(termino) ||
-      p.descripcion.toLowerCase().includes(termino)) &&
-    (!zona || p.ubicacion.toLowerCase().includes(zona)));
-  renderPerfiles(encontrados, true);
-  document.getElementById("perfiles").scrollIntoView({behavior:"smooth"});
+function elegir(oficio) {
+  document.getElementById('buscar').value=oficio;
+  buscarTrabajadores();
+  document.getElementById('trabajadores').scrollIntoView({behavior:'smooth'});
 }
 
-function renderPerfiles(lista = perfilesLocales, esBusqueda = false) {
-  const ejemplos = [
-    {nombre:"Perfil de ejemplo", oficio:"Electricidad", ubicacion:"Zona no verificada", descripcion:"Ejemplo visual de perfil profesional."},
-    {nombre:"Perfil de ejemplo", oficio:"Plomería", ubicacion:"Zona no verificada", descripcion:"Ejemplo visual de perfil profesional."}
-  ];
-  const trabajadores = lista.filter(p => p.tipo === "trabajador");
-  const mostrarLista = esBusqueda ? trabajadores : [...trabajadores, ...ejemplos];
-  document.getElementById("perfiles").innerHTML = mostrarLista.length
-    ? mostrarLista.map(p => `
-      <article class="tarjeta">
-        <div class="icono">👤</div>
-        <h3>${escapar(p.nombre)}</h3>
-        <span class="etiqueta">${escapar(p.oficio)}</span>
-        <p>${escapar(p.descripcion || "Perfil profesional")}</p>
-        <p class="muted">📍 ${escapar(p.ubicacion || "Zona aproximada no indicada")}</p>
-        <p class="muted">Identidad y reputación aún no verificadas</p>
-      </article>`).join("")
-    : `<div class="tarjeta">No encontramos perfiles en esta demostración. Probá otra especialidad o zona.</div>`;
+function buscarTrabajadores() {
+  const q=document.getElementById('buscar').value.trim().toLowerCase();
+  const z=document.getElementById('zona').value.trim().toLowerCase();
+  const encontrados=perfiles.filter(p =>
+    (!q || p.oficio.toLowerCase().includes(q) ||
+      p.descripcion.toLowerCase().includes(q)) &&
+    (!z || p.zona.toLowerCase().includes(z))
+  );
+  dibujar(encontrados);
+  if(!encontrados.length)
+    avisar('Todavía no hay perfiles de demostración que coincidan. Cuando se conecte la base de datos, se podrán buscar trabajadores registrados.');
 }
 
-document.getElementById("anio").textContent = new Date().getFullYear();
-cargarOficios();
-renderPerfiles();
+function dibujar(lista) {
+  const cont=document.getElementById('resultados');
+  cont.replaceChildren();
+  lista.forEach(p=>{
+    const tarjeta=document.createElement('article');
+    tarjeta.className='tarjeta';
+    const titulo=document.createElement('h3');
+    titulo.textContent=p.nombre;
+    const oficio=document.createElement('p');
+    oficio.textContent=p.oficio;
+    const zona=document.createElement('p');
+    zona.textContent='📍 Zona aproximada: '+p.zona;
+    const desc=document.createElement('p');
+    desc.textContent=p.descripcion;
+    const estado=document.createElement('span');
+    estado.className='etiqueta';
+    estado.textContent='Perfil de demostración';
+    tarjeta.append(titulo,oficio,zona,desc,estado);
+    cont.appendChild(tarjeta);
+  });
+}
 </script>
 </body>
 </html>
+
 
