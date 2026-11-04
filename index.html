@@ -598,20 +598,101 @@ function joinMeeting(){
  }catch(e){notify("Ingresá un enlace de reunión válido.");}
 }
 function GenOpenMeeting(url){window.open(url,"_blank","noopener,noreferrer")}
-  async function register(){
- const name=document.getElementById("authName").value.trim();
- const email=document.getElementById("authEmail").value.trim();
- const password=document.getElementById("authPassword").value;
- if(!name||!email||password.length<8){
-  notify("Ingresá tu nombre, correo y contraseña de al menos 8 caracteres.");return;
- }
- notify("Interfaz lista. Conectá Supabase para crear la cuenta de forma segura.");
+ async function register(){
+  const name = document.getElementById("authName").value.trim();
+  const email = document.getElementById("authEmail").value.trim();
+  const password = document.getElementById("authPassword").value;
+  const selectedRole = document.getElementById("role").value;
+
+  if(!name || !email || password.length < 8){
+    notify("Ingresá tu nombre, correo y una contraseña de al menos 8 caracteres.");
+    return;
+  }
+
+  const roleValue = selectedRole === "cliente" ? "client" : "worker";
+
+  try {
+    const { data, error } = await supabaseClient.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          full_name: name,
+          role: roleValue
+        }
+      }
+    });
+
+    if(error) throw error;
+
+    if(data.session && data.user){
+      const { error: profileError } = await supabaseClient
+        .from("profiles")
+        .insert({
+          id: data.user.id,
+          full_name: name,
+          role: roleValue
+        });
+
+      if(profileError) throw profileError;
+
+      notify("¡Cuenta creada correctamente en OfiNexo!");
+      closeModal("authModal");
+    } else {
+      notify("Revisá tu correo y confirmá tu cuenta. Después podrás ingresar.");
+    }
+
+  } catch(error) {
+    notify("No se pudo crear la cuenta: " + error.message);
+  }
 }
-function login(){
- const email=document.getElementById("authEmail").value.trim();
- const password=document.getElementById("authPassword").value;
- if(!email||!password){notify("Ingresá tu correo y contraseña.");return}
- notify("Conectá Supabase Auth para habilitar el inicio de sesión real.");
+
+async function login(){
+  const email = document.getElementById("authEmail").value.trim();
+  const password = document.getElementById("authPassword").value;
+
+  if(!email || !password){
+    notify("Ingresá tu correo y contraseña.");
+    return;
+  }
+
+  try {
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
+      email,
+      password
+    });
+
+    if(error) throw error;
+
+    const user = data.user;
+    const metadata = user.user_metadata || {};
+
+    const { data: profile, error: readError } = await supabaseClient
+      .from("profiles")
+      .select("id")
+      .eq("id", user.id)
+      .maybeSingle();
+
+    if(readError) throw readError;
+
+    if(!profile){
+      const { error: insertError } = await supabaseClient
+        .from("profiles")
+        .insert({
+          id: user.id,
+          full_name: metadata.full_name || email,
+          role: metadata.role || "client"
+        });
+
+      if(insertError) throw insertError;
+    }
+
+    notify("¡Ingresaste correctamente a OfiNexo!");
+    closeModal("authModal");
+
+  } catch(error) {
+    notify("No se pudo iniciar sesión: " + error.message);
+  }
 }
 renderCategories();
 renderPeople();
