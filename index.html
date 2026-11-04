@@ -598,7 +598,7 @@ function joinMeeting(){
  }catch(e){notify("Ingresá un enlace de reunión válido.");}
 }
 function GenOpenMeeting(url){window.open(url,"_blank","noopener,noreferrer")}
-function register(){
+  async function register(){
  const name=document.getElementById("authName").value.trim();
  const email=document.getElementById("authEmail").value.trim();
  const password=document.getElementById("authPassword").value;
