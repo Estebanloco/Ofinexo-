@@ -367,11 +367,16 @@ p{line-height:1.5}
  </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   
 // CONEXIÓN DE OFINEXO CON SUPABASE
 const SUPABASE_URL = "https://rmpfptexcvguedvelzhz.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_j-DU-L_Tmj59Gq-DH5APrw_g1hHSPmm";
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
+);
 
 
 const categories = [
