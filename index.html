@@ -675,7 +675,7 @@ async function login(){
 
     if(readError) throw readError;
 
-    if(!profile){
+    if(!perfile){
       const { error: insertError } = await supabaseClient
         .from("perfíles")
         .insert({
