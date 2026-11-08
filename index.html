@@ -770,6 +770,7 @@ async function login(){
         .insert({
           id: user.id,
 
+
 async function register(){
   const name = document.getElementById("authName").value.trim();
   const email = document.getElementById("authEmail").value.trim();
@@ -814,7 +815,7 @@ async function register(){
       notify("¡Cuenta creada correctamente en OfiNexo!");
       closeModal("authModal");
     } else {
-      notify("Cuenta registrada. Revisá tu correo para confirmar la dirección antes de ingresar.");
+      notify("Revisá tu correo para confirmar tu cuenta y después ingresar.");
     }
 
   } catch(error) {
@@ -869,6 +870,7 @@ async function login(){
     notify("No se pudo iniciar sesión: " + error.message);
   }
 }
+
 
 renderCategories();
 renderPeople();
