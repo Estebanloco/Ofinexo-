@@ -769,6 +769,92 @@ async function login(){
         .from("perfiles")
         .insert({
           id: user.id,
+
+async function register(){
+  const name = document.getElementById("authName").value.trim();
+  const email = document.getElementById("authEmail").value.trim();
+  const password = document.getElementById("authPassword").value;
+  const selectedRole = document.getElementById("role").value;
+
+  if(!name || !email || password.length < 8){
+    notify("Ingresá tu nombre, correo y una contraseña de al menos 8 caracteres.");
+    return;
+  }
+
+  if(!["cliente","trabajador"].includes(selectedRole)){
+    notify("Seleccioná cliente o trabajador.");
+    return;
+  }
+
+  try {
+    const { data, error } = await supabaseClient.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          nombre: name,
+          tipo_usuario: selectedRole
+        }
+      }
+    });
+
+    if(error) throw error;
+
+    if(data.session && data.user){
+      const { error: profileError } = await supabaseClient
+        .from("perfiles")
+        .upsert({
+          id: data.user.id,
+          nombre: name,
+          tipo_usuario: selectedRole
+        }, { onConflict: "id" });
+
+      if(profileError) throw profileError;
+
+      notify("¡Cuenta creada correctamente en OfiNexo!");
+      closeModal("authModal");
+    } else {
+      notify("Cuenta registrada. Revisá tu correo para confirmar la dirección antes de ingresar.");
+    }
+
+  } catch(error) {
+    notify("No se pudo crear la cuenta: " + error.message);
+  }
+}
+
+async function login(){
+  const email = document.getElementById("authEmail").value.trim();
+  const password = document.getElementById("authPassword").value;
+
+  if(!email || !password){
+    notify("Ingresá tu correo y contraseña.");
+    return;
+  }
+
+  try {
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
+      email,
+      password
+    });
+
+    if(error) throw error;
+
+    const user = data.user;
+    const metadata = user.user_metadata || {};
+
+    const { data: perfil, error: readError } = await supabaseClient
+      .from("perfiles")
+      .select("id")
+      .eq("id", user.id)
+      .maybeSingle();
+
+    if(readError) throw readError;
+
+    if(!perfil){
+      const { error: insertError } = await supabaseClient
+        .from("perfiles")
+        .insert({
+          id: user.id,
           nombre: metadata.nombre || email,
           tipo_usuario: metadata.tipo_usuario || "cliente"
         });
